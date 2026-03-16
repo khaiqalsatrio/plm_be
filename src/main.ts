@@ -11,13 +11,19 @@ import { AppModule } from './app.module';
 import Constant from './common/constant';
 import { JWT_ACCESS_TOKEN, SWAGGER_PASSWORD, SWAGGER_USER } from './common/constant/constant';
 
+function isDocsPath(url: string) {
+  const path = url.split('?')[0];
+  return path === '/docs' || path.startsWith('/docs/') || path === '/docs-json';
+}
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const adapter = new FastifyAdapter();
   const fastify = adapter.getInstance();
 
-  await fastify.register(fastifyHelmet as never);
+  await fastify.register(fastifyHelmet as never, {
+    global: false,
+  });
   await fastify.register(fastifyMultipart as never, {
     limits: {
       fileSize: 2 * 1000 * 1024,
@@ -33,10 +39,36 @@ async function bootstrap() {
   });
 
   fastify.addHook('onRequest', async (request, reply) => {
-    const path = request.url.split('?')[0];
-    if (path === '/docs' || path.startsWith('/docs/') || path === '/docs-json') {
-      await (fastify as any).basicAuth(request, reply);
+    if (!isDocsPath(request.url)) {
+      await (reply as any).helmet();
     }
+
+    if (!isDocsPath(request.url)) {
+      return;
+    }
+
+    await new Promise<void>((resolve) => {
+      (fastify as any).basicAuth(request, reply, (error?: Error) => {
+        if (error) {
+          if (!reply.sent) {
+            const statusCode =
+              'statusCode' in error && typeof error.statusCode === 'number'
+                ? error.statusCode
+                : 401;
+
+            void reply.code(statusCode).send({
+              statusCode,
+              message: error.message,
+            });
+          }
+
+          resolve();
+          return;
+        }
+
+        resolve();
+      });
+    });
   });
 
   const app = await NestFactory.create<NestFastifyApplication>(
