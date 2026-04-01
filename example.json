@@ -1,0 +1,85 @@
+[
+    {
+        "name": "lead",
+        "entity": "lead",
+        "routes": "leads",
+        "idType": "uuid",
+        "fields": [
+            {
+                "name": "name",
+                "type": "varchar",
+                "length": 255,
+                "unique": false,
+                "nullable": false,
+                "description": "Full name of the lead",
+                "example": "John Doe"
+            },
+            {
+                "name": "email",
+                "type": "varchar",
+                "length": 255,
+                "unique": true,
+                "nullable": true,
+                "description": "Email address of the lead",
+                "example": "john.doe@email.com"
+            },
+            {
+                "name": "phone",
+                "type": "varchar",
+                "length": 50,
+                "unique": false,
+                "nullable": true,
+                "description": "Phone number of the lead",
+                "example": "+628123456789"
+            },
+            {
+                "name": "company",
+                "type": "varchar",
+                "length": 255,
+                "unique": false,
+                "nullable": true,
+                "description": "Company or organization name",
+                "example": "PT Teknologi Nusantara"
+            },
+            {
+                "name": "source",
+                "type": "varchar",
+                "length": 100,
+                "unique": false,
+                "nullable": true,
+                "description": "Source of the lead",
+                "example": "website"
+            },
+            {
+                "name": "status",
+                "type": "enum",
+                "enumValues": [
+                    "new",
+                    "contacted",
+                    "qualified",
+                    "lost",
+                    "converted"
+                ],
+                "tsEnumName": "LeadStatus",
+                "description": "Current status of the lead",
+                "example": "new"
+            },
+            {
+                "name": "notes",
+                "type": "text",
+                "unique": false,
+                "nullable": true,
+                "description": "Additional notes about the lead",
+                "example": "Interested in AI automation demo"
+            },
+            {
+                "name": "category_id",
+                "type": "uuid",
+                "unique": false,
+                "nullable": false,
+                "description": "ID of the category this lead belongs to",
+                "example": "123e4567-e89b-12d3-a456-426614174000"
+            }
+        ]
+    }
+]

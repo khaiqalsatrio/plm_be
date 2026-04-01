@@ -1,0 +1,85 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+import { hashText } from 'pii-cyclops';
+import { Repository } from 'typeorm';
+
+import Constant from 'src/common/constant';
+import { ADMIN } from 'src/common/constant/constant';
+import MessageHandler from 'src/common/message';
+import { User } from 'src/entities/user.entity';
+
+import { LoginDto } from '../dto/login.dto';
+
+@Injectable()
+export class LoginUseCase {
+    constructor(
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
+    ) { }
+
+    async doLoginAdmin(req: any, body: LoginDto): Promise<any> {
+
+        const { username, password } = body;
+        const email_hash = hashText(username);
+        const user = await this.userRepository.findOne({
+            where: { email_hash, role: ADMIN },
+            select: {
+                id: true,
+                phone: true,
+                name: true,
+                role: true,
+                password: true,
+            }
+        });
+        if (!user) {
+            throw new Error(MessageHandler.ERR001);
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error(MessageHandler.ERR001);
+        }
+
+        const payload = { id: user.id, phone: user.phone, name: user.name, role: user.role };
+        const token = jwt.sign(payload, Constant.JWT_SECRET, { expiresIn: '7d' });
+        return { fingerprint: true, user: { id: user.id, phone: user.phone, name: user.name }, token };
+
+    }
+
+    async doLogin(req: any, body: LoginDto): Promise<any> {
+
+        const { username, password } = body;
+        const email_hash = hashText(username);
+        const user = await this.userRepository.findOne({
+            where: { email_hash },
+            select: {
+                id: true,
+                phone: true,
+                name: true,
+                role: true,
+                password: true,
+                fingerprint: true,
+            }
+        });
+
+        if (!user) {
+            throw new Error(MessageHandler.ERR001);
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error(MessageHandler.ERR001);
+        }
+
+        const fingerprintHash = req?.fingerprint?.hash;
+        if (fingerprintHash) {
+            await this.userRepository.update(user.id, { fingerprint: fingerprintHash });
+        }
+        const payload = { id: user.id, email: user.email, name: user.name, role: user.role, avatar: user.avatar };
+        const token = jwt.sign(payload, Constant.JWT_SECRET, { expiresIn: '7d' });
+        return { fingerprint: Boolean(fingerprintHash), user: { id: user.id, name: user.name, avatar: user.avatar }, token };
+
+    }
+}
