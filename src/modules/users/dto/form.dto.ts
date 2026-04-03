@@ -56,14 +56,7 @@ export class UserDto {
     })
     public password?: string;
 
-    @IsDecimal()
-    @IsOptional()
-    @ApiProperty({
-        description: 'The rating of the user',
-        example: 4.5,
-        nullable: true,
-    })
-    public rating?: number;
+
 
     @IsEnum(['verified', 'unverified'])
     @IsOptional()
@@ -75,11 +68,11 @@ export class UserDto {
     })
     public status?: string;
 
-    @IsEnum(['user', 'admin'])
+    @IsEnum(['user', 'admin', 'product_owner'])
     @IsOptional()
     @ApiProperty({
         description: 'The type of the user',
-        enum: ['user', 'admin'],
+        enum: ['user', 'admin', 'product_owner'],
         example: 'user',
         nullable: true,
     })

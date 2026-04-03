@@ -1,0 +1,1343 @@
+{
+  "project": "plm-product-assessment",
+  "version": "1.0.0",
+  "entities": [
+    {
+      "name": "Product",
+      "table": "products",
+      "description": "Master data produk yang akan dinilai",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "product_code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "product_name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "product_category_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "MasterProductCategory.id"
+        },
+        {
+          "name": "business_unit_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "MasterBusinessUnit.id"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "product_manager_id",
+          "type": "uuid",
+          "required": false
+        },
+        {
+          "name": "product_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "digital_product",
+            "internal_tool",
+            "partnership_product",
+            "ai_product",
+            "api_service"
+          ]
+        },
+        {
+          "name": "stage",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "idea",
+            "discovery",
+            "assessment",
+            "development",
+            "pilot",
+            "launch",
+            "retired"
+          ]
+        },
+        {
+          "name": "priority",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "objective",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "target_market",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "value_proposition",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "status",
+          "type": "enum",
+          "required": true,
+          "default": "active",
+          "enumValues": [
+            "active",
+            "inactive",
+            "archived"
+          ]
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "ProductAssessment",
+      "table": "product_assessments",
+      "description": "Satu siklus assessment untuk suatu produk",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_no",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "product_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "Product.id"
+        },
+        {
+          "name": "template_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentTemplate.id"
+        },
+        {
+          "name": "version",
+          "type": "integer",
+          "required": true,
+          "default": 1
+        },
+        {
+          "name": "assessment_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "initial",
+            "revision",
+            "reassessment",
+            "periodic_review"
+          ]
+        },
+        {
+          "name": "overall_status",
+          "type": "enum",
+          "required": true,
+          "default": "draft",
+          "enumValues": [
+            "draft",
+            "submitted",
+            "in_review",
+            "need_revision",
+            "approved",
+            "rejected",
+            "archived"
+          ]
+        },
+        {
+          "name": "technical_status",
+          "type": "enum",
+          "required": true,
+          "default": "not_started",
+          "enumValues": [
+            "not_started",
+            "in_progress",
+            "reviewed",
+            "returned",
+            "finalized"
+          ]
+        },
+        {
+          "name": "business_status",
+          "type": "enum",
+          "required": true,
+          "default": "not_started",
+          "enumValues": [
+            "not_started",
+            "in_progress",
+            "reviewed",
+            "returned",
+            "finalized"
+          ]
+        },
+        {
+          "name": "legal_status",
+          "type": "enum",
+          "required": true,
+          "default": "not_started",
+          "enumValues": [
+            "not_started",
+            "in_progress",
+            "reviewed",
+            "returned",
+            "finalized"
+          ]
+        },
+        {
+          "name": "technical_score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "business_score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "legal_score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "total_score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "technical_risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "business_risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "legal_risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "overall_risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "recommendation",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "recommended",
+            "recommended_with_revision",
+            "major_revision_needed",
+            "not_recommended"
+          ]
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "submitted_by",
+          "type": "uuid",
+          "required": false
+        },
+        {
+          "name": "submitted_at",
+          "type": "timestamp",
+          "required": false
+        },
+        {
+          "name": "approved_by",
+          "type": "uuid",
+          "required": false
+        },
+        {
+          "name": "approved_at",
+          "type": "timestamp",
+          "required": false
+        },
+        {
+          "name": "decision_note",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentTemplate",
+      "table": "assessment_templates",
+      "description": "Template assessment berdasarkan tipe produk",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "template_code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "template_name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "product_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "digital_product",
+            "internal_tool",
+            "partnership_product",
+            "ai_product",
+            "api_service"
+          ]
+        },
+        {
+          "name": "version",
+          "type": "integer",
+          "required": true,
+          "default": 1
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        {
+          "name": "published_at",
+          "type": "timestamp",
+          "required": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentSection",
+      "table": "assessment_sections",
+      "description": "Section atau domain utama dalam template assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "template_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentTemplate.id"
+        },
+        {
+          "name": "section_code",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "section_name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "section_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "technical",
+            "business",
+            "legal"
+          ]
+        },
+        {
+          "name": "weight",
+          "type": "decimal",
+          "required": true,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "is_required",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentCriteria",
+      "table": "assessment_criteria",
+      "description": "Kriteria penilaian di dalam sebuah section",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "section_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentSection.id"
+        },
+        {
+          "name": "criteria_code",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "criteria_name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "weight",
+          "type": "decimal",
+          "required": true,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "score_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "manual_score",
+            "auto_score",
+            "boolean_score",
+            "option_score"
+          ]
+        },
+        {
+          "name": "is_required",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        {
+          "name": "has_comment",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        {
+          "name": "has_attachment",
+          "type": "boolean",
+          "required": true,
+          "default": false
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentQuestion",
+      "table": "assessment_questions",
+      "description": "Pertanyaan detail di bawah kriteria assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "criteria_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentCriteria.id"
+        },
+        {
+          "name": "question_code",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "question_text",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "question_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "statement",
+            "question",
+            "checklist"
+          ]
+        },
+        {
+          "name": "answer_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "text",
+            "number",
+            "boolean",
+            "select",
+            "multi_select",
+            "score"
+          ]
+        },
+        {
+          "name": "weight",
+          "type": "decimal",
+          "required": true,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "is_required",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        },
+        {
+          "name": "help_text",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "length": 255
+        },
+        {
+          "name": "option_source",
+          "type": "string",
+          "required": false,
+          "length": 100
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentResponse",
+      "table": "assessment_responses",
+      "description": "Jawaban aktual dari reviewer atau owner pada assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "section_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentSection.id"
+        },
+        {
+          "name": "criteria_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentCriteria.id"
+        },
+        {
+          "name": "question_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "AssessmentQuestion.id"
+        },
+        {
+          "name": "reviewer_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "technical",
+            "business",
+            "legal",
+            "owner"
+          ]
+        },
+        {
+          "name": "answer_text",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "answer_number",
+          "type": "decimal",
+          "required": false,
+          "precision": 12,
+          "scale": 2
+        },
+        {
+          "name": "answer_boolean",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "answer_option",
+          "type": "string",
+          "required": false,
+          "length": 255
+        },
+        {
+          "name": "score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentReview",
+      "table": "assessment_reviews",
+      "description": "Ringkasan hasil review per domain",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "review_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "technical",
+            "business",
+            "legal"
+          ]
+        },
+        {
+          "name": "reviewer_id",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "review_status",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "not_started",
+            "in_progress",
+            "reviewed",
+            "returned",
+            "finalized"
+          ]
+        },
+        {
+          "name": "score",
+          "type": "decimal",
+          "required": false,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "risk_level",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "recommendation",
+          "type": "enum",
+          "required": false,
+          "enumValues": [
+            "pass",
+            "pass_with_notes",
+            "revision_needed",
+            "not_recommended"
+          ]
+        },
+        {
+          "name": "reviewed_at",
+          "type": "timestamp",
+          "required": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentApproval",
+      "table": "assessment_approvals",
+      "description": "Keputusan final approval assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "approver_id",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "decision",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "approve",
+            "approve_with_condition",
+            "need_revision",
+            "reject",
+            "hold"
+          ]
+        },
+        {
+          "name": "decision_note",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "follow_up_action",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "required": false
+        },
+        {
+          "name": "approved_at",
+          "type": "timestamp",
+          "required": false
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentAttachment",
+      "table": "assessment_attachments",
+      "description": "Lampiran dokumen pendukung assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "section_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentSection.id"
+        },
+        {
+          "name": "criteria_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentCriteria.id"
+        },
+        {
+          "name": "file_name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "file_url",
+          "type": "string",
+          "required": true,
+          "length": 500
+        },
+        {
+          "name": "file_type",
+          "type": "string",
+          "required": true,
+          "length": 50
+        },
+        {
+          "name": "document_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "business_case",
+            "brd",
+            "architecture_diagram",
+            "legal_opinion",
+            "compliance_checklist",
+            "other"
+          ]
+        },
+        {
+          "name": "uploaded_by",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "uploaded_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentComment",
+      "table": "assessment_comments",
+      "description": "Komentar diskusi per assessment atau per section",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "section_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentSection.id"
+        },
+        {
+          "name": "criteria_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentCriteria.id"
+        },
+        {
+          "name": "parent_comment_id",
+          "type": "uuid",
+          "required": false,
+          "relation": "AssessmentComment.id"
+        },
+        {
+          "name": "comment_text",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "comment_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "general",
+            "review_note",
+            "revision_note",
+            "approval_note"
+          ]
+        },
+        {
+          "name": "mentioned_user_id",
+          "type": "uuid",
+          "required": false
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AssessmentAuditLog",
+      "table": "assessment_audit_logs",
+      "description": "Audit trail perubahan pada assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "assessment_id",
+          "type": "uuid",
+          "required": true,
+          "relation": "ProductAssessment.id"
+        },
+        {
+          "name": "action_type",
+          "type": "enum",
+          "required": true,
+          "enumValues": [
+            "create",
+            "update",
+            "submit",
+            "review",
+            "return",
+            "approve",
+            "reject",
+            "archive"
+          ]
+        },
+        {
+          "name": "from_value",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "to_value",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "actor_id",
+          "type": "uuid",
+          "required": true
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "MasterProductCategory",
+      "table": "master_product_categories",
+      "description": "Master kategori produk",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "MasterBusinessUnit",
+      "table": "master_business_units",
+      "description": "Master unit bisnis",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "MasterRiskLevel",
+      "table": "master_risk_levels",
+      "description": "Master level risiko",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "required": true,
+          "unique": true,
+          "length": 100
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "score_min",
+          "type": "decimal",
+          "required": true,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "score_max",
+          "type": "decimal",
+          "required": true,
+          "precision": 5,
+          "scale": 2
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": false,
+          "length": 50
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "MasterAssessmentOption",
+      "table": "master_assessment_options",
+      "description": "Master option untuk dropdown atau radio di assessment",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "required": true,
+          "primary": true
+        },
+        {
+          "name": "group_name",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "option_code",
+          "type": "string",
+          "required": true,
+          "length": 100
+        },
+        {
+          "name": "option_label",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "option_value",
+          "type": "string",
+          "required": true,
+          "length": 255
+        },
+        {
+          "name": "sort_order",
+          "type": "integer",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "is_active",
+          "type": "boolean",
+          "required": true,
+          "default": true
+        }
+      ]
+    }
+  ]
+}
