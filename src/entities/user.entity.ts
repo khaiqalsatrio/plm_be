@@ -33,8 +33,7 @@ export class User extends BaseEntity {
   public password: string;
 
   @Column({
-    type: 'enum',
-    enum: ['user', 'admin'],
+    enum: ['user', 'admin', 'product_owner'],
     default: 'user',
   })
   public role: string;
