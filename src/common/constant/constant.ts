@@ -3,6 +3,7 @@ import { env } from '../config/env';
 export const ADMIN = 'admin';
 export const USER = 'user';
 export const PRODUCT_OWNER = 'product_owner';
+export const TECHNICAL_REVIEWER = 'technical_reviewer';
 
 export const PII_ENCRYPTION_KEY = env.PII_ENCRYPTION_KEY;
 export const SWAGGER_USER = env.SWAGGER_USER;

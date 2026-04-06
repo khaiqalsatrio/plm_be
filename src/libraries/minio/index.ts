@@ -1,8 +1,9 @@
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as Minio from 'minio';
 
 import Constant from 'src/common/constant';
 
+@Injectable()
 class MinioClient {
     private client: Minio.Client;
     private readonly useSSL: boolean;

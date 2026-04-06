@@ -7,6 +7,7 @@ import { AssessmentResponse } from './assessment-response.entity';
 import { AssessmentReview } from './assessment-review.entity';
 import { BaseEntity } from './base.entity';
 import { Product } from './product.entity';
+import { AssessmentTemplate } from './assessment-template.entity';
 import { AssessmentType, AssessmentStatus, ReviewStatus, RiskLevel, AssessmentRecommendation } from '../common/constant/enum';
 
 @Entity('product_assessments')
@@ -23,6 +24,10 @@ export class ProductAssessment extends BaseEntity {
 
   @Column({ name: 'template_id', type: 'uuid', nullable: true })
   public template_id: string;
+
+  @ManyToOne(() => AssessmentTemplate)
+  @JoinColumn({ name: 'template_id' })
+  public template: AssessmentTemplate;
 
   @Column({ name: 'version', type: 'int', default: 1 })
   public version: number;

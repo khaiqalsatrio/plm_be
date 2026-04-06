@@ -27,6 +27,12 @@ export class AssessmentAttachment extends BaseEntity {
   @Column({ name: 'file_type', type: 'varchar', length: 100, nullable: true })
   public file_type: string;
 
+  @Column({ name: 'bucket', type: 'varchar', length: 100, nullable: true })
+  public bucket: string;
+
+  @Column({ name: 'is_private', type: 'boolean', default: false })
+  public is_private: boolean;
+
   @Column({ 
     name: 'document_type', 
     type: 'enum', 

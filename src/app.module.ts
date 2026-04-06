@@ -26,6 +26,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ProductAssessmentModule } from './modules/product-assessments/product-assessment.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MasterDataModule } from './modules/master-data/master-data.module';
+import { TechnicalReviewModule } from './modules/technical-reviews/technical-review.module';
 import { CategoryModule } from './modules/categories/category.module';
 import { MenuModule } from './modules/menus/menu.module';
 import { NotificationModule } from './modules/notifications/notification.module';
@@ -45,7 +46,7 @@ import { UsersModule } from './modules/users/users.module';
       password: Constant.DB_PASSWORD,
       database: Constant.DB_NAME,
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: Constant.DB_SYNCHRONIZE,
     }),
     TypeOrmModule.forFeature([
       RevokedToken,
@@ -74,9 +75,10 @@ import { UsersModule } from './modules/users/users.module';
     PermissionModule,
     RoleModule,
     ProfileModule,
-    ProductAssessmentModule,
     AuthModule,
     MasterDataModule,
+    TechnicalReviewModule,
+    ProductAssessmentModule,
   ],
   providers: [
     {
