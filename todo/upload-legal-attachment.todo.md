@@ -1,0 +1,10 @@
+- [ ] Create `UploadLegalAttachmentUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] `execute(assessmentId: string, file: any, logged: User, is_private: boolean, ...)`:
+        - [ ] Upload to Minio (`uploadLegal`).
+        - [ ] Save to `AssessmentAttachment` repository.
+        - [ ] `is_private`: `true`.
+        - [ ] `bucket`: `legal-tetangga`.
+        - [ ] `uploaded_by`: `logged.id`.
+- [ ] Create `LegalReviewController`: `POST /:id/attachments`
+    - [ ] Multipart handler (Fastify-style).
+- [ ] Register `UploadLegalAttachmentUseCase` in `LegalReviewModule`.

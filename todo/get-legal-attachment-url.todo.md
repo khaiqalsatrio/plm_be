@@ -1,0 +1,10 @@
+- [ ] Create `GetLegalAttachmentUrlUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] Repository: `InjectRepository(AssessmentAttachment)`
+    - [ ] `execute(attachmentId: string, logged: User)`:
+        - [ ] Find attachment.
+        - [ ] If `is_private` is true:
+            - [ ] `minioClient.getPresignedUrl`.
+            - [ ] Expiry: 1 hour (3600s).
+- [ ] Create `LegalReviewController`: `GET /:assessmentId/attachments/:attachmentId/url`
+- [ ] Register `GetLegalAttachmentUrlUseCase` in `LegalReviewModule`.
+- [ ] Update Swagger documentation.

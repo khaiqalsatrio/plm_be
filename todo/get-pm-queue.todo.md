@@ -1,0 +1,8 @@
+- [ ] Create `GetProductManagerQueueUseCase` in `src/modules/product-managers/usecases/`
+    - [ ] `execute(page: number, limit: number, logged: User)`:
+        - [ ] Find assessments filtered by status (NOT `draft`).
+        - [ ] Order by latest `updatedAt`.
+        - [ ] Map response with completion indicators (Tech/Bus/Legal statuses).
+- [ ] Update `ProductManagerController`: `GET /queue`
+    - [ ] Add `@Roles(PRODUCT_MANAGER)`.
+    - [ ] Handle pagination query.

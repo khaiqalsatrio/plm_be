@@ -24,6 +24,7 @@ import { respond } from 'src/libraries/respond';
 import { CreateProductAssessmentDto, UpdateProductAssessmentDto, DuplicateProductAssessmentDto } from './dto/product-assessment.dto';
 import { CreateAssessmentUseCase } from './usecases/create-assessment.usecase';
 import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usecase';
+import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.usecase';
 import { GetAssessmentsUseCase } from './usecases/get-assessments.usecase';
 import { SubmitAssessmentUseCase } from './usecases/submit-assessment.usecase';
 import { UpdateAssessmentUseCase } from './usecases/update-assessment.usecase';
@@ -38,6 +39,7 @@ export class ProductAssessmentController {
     private readonly updateUseCase: UpdateAssessmentUseCase,
     private readonly submitUseCase: SubmitAssessmentUseCase,
     private readonly duplicateUseCase: DuplicateAssessmentUseCase,
+    private readonly exportPdfUseCase: ExportAssessmentPdfUseCase,
   ) {}
 
   @Post()
@@ -126,6 +128,27 @@ export class ProductAssessmentController {
       return respond(res, 201, true, 'Assessment berhasil diduplikasi', data);
     } catch (error) {
       logger.error('[ProductAssessment] DUPLICATE ERROR', error);
+      return respond(res, 400, false, error.message || MessageHandler.ERR000);
+    }
+  }
+
+  @Get(':id/export-pdf')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(RolesGuard)
+  // @Roles(PRODUCT_OWNER) // Temporarily allow other reviewers if needed, or keep PO
+  async exportPdf(@Res() res, @Param('id') id: string) {
+    try {
+      const logged = res.locals.logged;
+      const doc = await this.exportPdfUseCase.execute(id, logged);
+      
+      const filename = `assessment-${id.substring(0, 8)}.pdf`;
+      res.header('Content-Type', 'application/pdf');
+      res.header('Content-Disposition', `attachment; filename=${filename}`);
+      
+      // Fastify specific: pipe directly to the response raw stream
+      doc.pipe(res.raw);
+    } catch (error) {
+      logger.error('[ProductAssessment] EXPORT PDF ERROR', error);
       return respond(res, 400, false, error.message || MessageHandler.ERR000);
     }
   }

@@ -1,0 +1,10 @@
+- [ ] Create `ReturnLegalReviewUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] `execute(id: string, dto: ReturnLegalReviewDto, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Update `ProductAssessment.overall_status` to `need_revision`.
+        - [ ] Update `ProductAssessment.legal_status` to `returned`.
+        - [ ] Create `AssessmentAuditLog` with reason.
+        - [ ] Save assessment and audit log.
+- [ ] Create `LegalReviewController`: `POST /:id/return`
+- [ ] Register `ReturnLegalReviewUseCase` in `LegalReviewModule`.
+- [ ] Create `ReturnLegalReviewDto` in `src/modules/legal-reviews/dto/legal-review.dto.ts`.

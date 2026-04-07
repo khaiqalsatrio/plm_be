@@ -1,0 +1,11 @@
+- [ ] Create `StartBusinessReviewUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Verify `overall_status` in [`submitted`, `in_review`].
+        - [ ] Verify `business_status` is not `finalized`.
+        - [ ] Update `business_status` to `in_progress`.
+        - [ ] Update `overall_status` to `in_review` (if currently `submitted`).
+        - [ ] Create `AssessmentAuditLog`.
+        - [ ] Save assessment and audit log.
+- [ ] Create `BusinessReviewController`: `POST /:id/start`
+- [ ] Register `StartBusinessReviewUseCase` in `BusinessReviewModule`.

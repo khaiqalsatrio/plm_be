@@ -27,6 +27,9 @@ import { ProductAssessmentModule } from './modules/product-assessments/product-a
 import { AuthModule } from './modules/auth/auth.module';
 import { MasterDataModule } from './modules/master-data/master-data.module';
 import { TechnicalReviewModule } from './modules/technical-reviews/technical-review.module';
+import { BusinessReviewModule } from './modules/business-reviews/business-review.module';
+import { LegalReviewModule } from './modules/legal-reviews/legal-review.module';
+import { ProductManagerModule } from './modules/product-managers/product-manager.module';
 import { CategoryModule } from './modules/categories/category.module';
 import { MenuModule } from './modules/menus/menu.module';
 import { NotificationModule } from './modules/notifications/notification.module';
@@ -78,6 +81,9 @@ import { UsersModule } from './modules/users/users.module';
     AuthModule,
     MasterDataModule,
     TechnicalReviewModule,
+    BusinessReviewModule,
+    LegalReviewModule,
+    ProductManagerModule,
     ProductAssessmentModule,
   ],
   providers: [

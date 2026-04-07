@@ -1,0 +1,13 @@
+- [ ] Create `SubmitBusinessReviewUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] `execute(id: string, dto: SubmitBusinessReviewDto, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Calculate `total_business_score` from `AssessmentResponse`.
+        - [ ] Create `AssessmentReview` entries.
+        - [ ] Update `ProductAssessment.business_status` to `finalized`.
+        - [ ] Update `ProductAssessment.business_score`
+        - [ ] Update `ProductAssessment.business_risk_level`.
+        - [ ] Create `AssessmentAuditLog`.
+        - [ ] Save assessment and audit log.
+- [ ] Create `BusinessReviewController`: `POST /:id/submit`
+- [ ] Register `SubmitBusinessReviewUseCase` in `BusinessReviewModule`.
+- [ ] Create `SubmitBusinessReviewDto` in `src/modules/business-reviews/dto/business-review.dto.ts`.

@@ -1,0 +1,6 @@
+- [ ] Create `GetAssessmentApprovalDetailUseCase` in `src/modules/product-managers/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment with relations: `product`, `product.category`, `product.business_unit`, `reviews`, `attachments`.
+        - [ ] Return combined result for PM overview.
+- [ ] Update `ProductManagerController`: `GET /assessment/:id`
+    - [ ] Add `@Roles(PRODUCT_MANAGER)`.

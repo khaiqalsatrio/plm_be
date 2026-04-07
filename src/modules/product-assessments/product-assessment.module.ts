@@ -11,6 +11,7 @@ import { GetAssessmentsUseCase } from './usecases/get-assessments.usecase';
 import { SubmitAssessmentUseCase } from './usecases/submit-assessment.usecase';
 import { UpdateAssessmentUseCase } from './usecases/update-assessment.usecase';
 import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usecase';
+import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.usecase';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usec
     UpdateAssessmentUseCase,
     SubmitAssessmentUseCase,
     DuplicateAssessmentUseCase,
+    ExportAssessmentPdfUseCase,
   ],
 })
 export class ProductAssessmentModule {}

@@ -1,0 +1,11 @@
+- [ ] Create `StartLegalReviewUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Verify `overall_status` in [`submitted`, `in_review`].
+        - [ ] Verify `legal_status` is not `finalized`.
+        - [ ] Update `legal_status` to `in_progress`.
+        - [ ] Update `overall_status` to `in_review` (if currently `submitted`).
+        - [ ] Create `AssessmentAuditLog`.
+        - [ ] Save assessment and audit log.
+- [ ] Create `LegalReviewController`: `POST /:id/start`
+- [ ] Register `StartLegalReviewUseCase` in `LegalReviewModule`.

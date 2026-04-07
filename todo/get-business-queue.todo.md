@@ -1,0 +1,14 @@
+- [ ] Create `GetBusinessQueueUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] Repository: `InjectRepository(ProductAssessment)`
+    - [ ] `paginate` method:
+        - [ ] Joins: `product`, `product.category`, `product.business_unit`, `template`
+        - [ ] Where: `overall_status` IN (`submitted`, `in_review`)
+        - [ ] Optional: filter by `business_status`
+- [ ] Create `BusinessReviewController` in `src/modules/business-reviews/`
+    - [ ] URL: `v1/business-reviews`
+    - [ ] Endpoint: `GET /`
+    - [ ] Decorators: `@UseGuards(RolesGuard)`, `@Roles(BUSINESS_REVIEWER)`, `@ApiBearerAuth(...)`
+- [ ] Create `BusinessReviewModule`
+    - [ ] Register `GetBusinessQueueUseCase`
+    - [ ] Register repositories
+- [ ] Register `BusinessReviewModule` in `AppModule`

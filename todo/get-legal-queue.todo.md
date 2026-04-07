@@ -1,0 +1,14 @@
+- [ ] Create `GetLegalQueueUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] Repository: `InjectRepository(ProductAssessment)`
+    - [ ] `paginate` method:
+        - [ ] Joins: `product`, `product.category`, `product.business_unit`, `template`
+        - [ ] Where: `overall_status` IN (`submitted`, `in_review`)
+        - [ ] Optional: filter by `legal_status`
+- [ ] Create `LegalReviewController` in `src/modules/legal-reviews/`
+    - [ ] URL: `v1/legal-reviews`
+    - [ ] Endpoint: `GET /`
+    - [ ] Decorators: `@UseGuards(RolesGuard)`, `@Roles(LEGAL_REVIEWER)`, `@ApiBearerAuth(...)`
+- [ ] Create `LegalReviewModule`
+    - [ ] Register `GetLegalQueueUseCase`
+    - [ ] Register repositories
+- [ ] Register `LegalReviewModule` in `AppModule`

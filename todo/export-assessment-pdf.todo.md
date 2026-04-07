@@ -1,0 +1,15 @@
+- [ ] Instalasi dependensi `pdfkit`
+- [ ] Create `ExportAssessmentPdfUseCase` in `src/modules/product-assessments/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment with all relations.
+        - [ ] Initialize `PDFDocument` from `pdfkit`.
+        - [ ] Build Header section (Product Metadata).
+        - [ ] Build Summary Table (Technical, Business, Legal Scores).
+        - [ ] Build Detail Section (Criteria & Comments).
+        - [ ] Build Signature Section (4 blocks for PO, Tech, Business, Legal).
+        - [ ] Pipe output stream to response.
+- [ ] Update `ProductAssessmentController`: `GET /:id/export-pdf`
+    - [ ] Set appropriate headers for file download.
+    - [ ] Call `ExportAssessmentPdfUseCase`.
+- [ ] Register `ExportAssessmentPdfUseCase` in `ProductAssessmentModule`.
+- [ ] Verify PDF layout and data accuracy.

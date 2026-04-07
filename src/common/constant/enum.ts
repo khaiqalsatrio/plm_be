@@ -138,6 +138,7 @@ export enum AuditActionType {
   CREATE = 'create',
   UPDATE = 'update',
   SUBMIT = 'submit',
+  START_REVIEW = 'start_review',
   REVIEW = 'review',
   RETURN = 'return',
   APPROVE = 'approve',

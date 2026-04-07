@@ -1,0 +1,9 @@
+- [ ] Create `SaveBusinessReviewDraftUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] Input: `assessment_id`, `SaveTechnicalReviewDto` (re-use DTO schema if possible, or new `SaveBusinessReviewDto`).
+    - [ ] Logic:
+        - [ ] Validasi assessment and status.
+        - [ ] Opsert `AssessmentResponse` for each item.
+        - [ ] reviewer_type: `business`.
+- [ ] Create `BusinessReviewController`: `POST /:id/save`
+- [ ] Register `SaveBusinessReviewDraftUseCase` in `BusinessReviewModule`.
+- [ ] Create `SaveBusinessReviewDto` in `src/modules/business-reviews/dto/business-review.dto.ts`.

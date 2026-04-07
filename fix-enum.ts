@@ -16,19 +16,23 @@ async function fixEnum() {
     await client.connect();
     console.log('Terhubung ke database...');
     
-    // Query untuk mengecek apakah nilai 'technical_reviewer' sudah ada di enum
-    const checkQuery = `SELECT target.enumlabel FROM pg_type type 
-                       JOIN pg_enum target ON type.oid = target.enumtypid 
-                       WHERE type.typname = 'users_role_enum' AND target.enumlabel = 'technical_reviewer';`;
+    const rolesToAdd = ['business_reviewer', 'legal_reviewer', 'product_manager'];
     
-    const res = await client.query(checkQuery);
-    
-    if (res.rows.length === 0) {
-      console.log("Menambahkan nilai 'technical_reviewer' ke users_role_enum...");
-      await client.query("ALTER TYPE users_role_enum ADD VALUE 'technical_reviewer';");
-      console.log('Berhasil diperbarui!');
-    } else {
-      console.log("Nilai 'technical_reviewer' sudah ada di database.");
+    for (const role of rolesToAdd) {
+      const checkQuery = `SELECT 1 FROM pg_type t 
+                         JOIN pg_enum e ON t.oid = e.enumtypid 
+                         WHERE t.typname = 'users_role_enum' AND e.enumlabel = '${role}';`;
+      
+      const res = await client.query(checkQuery);
+      
+      if (res.rows.length === 0) {
+        console.log(`Menambahkan nilai '${role}' ke users_role_enum...`);
+        // Note: ALTER TYPE ... ADD VALUE cannot be executed in a transaction, and that's fine here.
+        await client.query(`ALTER TYPE users_role_enum ADD VALUE '${role}';`);
+        console.log(`Berhasil menambahkan '${role}'!`);
+      } else {
+        console.log(`Nilai '${role}' sudah ada di database.`);
+      }
     }
   } catch (err: any) {
     console.error('Error saat menjalankan query:', err.message);

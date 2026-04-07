@@ -68,11 +68,11 @@ export class UserDto {
     })
     public status?: string;
 
-    @IsEnum(['user', 'admin', 'product_owner', 'technical_reviewer'])
+    @IsEnum(['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager'])
     @IsOptional()
     @ApiProperty({
         description: 'The type of the user',
-        enum: ['user', 'admin', 'product_owner', 'technical_reviewer'],
+        enum: ['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager'],
         example: 'user',
         nullable: true,
     })

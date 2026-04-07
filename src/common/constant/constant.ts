@@ -4,6 +4,9 @@ export const ADMIN = 'admin';
 export const USER = 'user';
 export const PRODUCT_OWNER = 'product_owner';
 export const TECHNICAL_REVIEWER = 'technical_reviewer';
+export const BUSINESS_REVIEWER = 'business_reviewer';
+export const LEGAL_REVIEWER = 'legal_reviewer';
+export const PRODUCT_MANAGER = 'product_manager';
 
 export const PII_ENCRYPTION_KEY = env.PII_ENCRYPTION_KEY;
 export const SWAGGER_USER = env.SWAGGER_USER;
