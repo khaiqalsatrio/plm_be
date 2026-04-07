@@ -20,46 +20,31 @@ export class LoginUseCase {
     ) { }
 
     async doLoginAdmin(req: any, body: LoginDto): Promise<any> {
-
-        const { username, password } = body;
-        const email_hash = hashText(username);
-        const user = await this.userRepository.findOne({
-            where: { email_hash, role: ADMIN },
-            select: {
-                id: true,
-                phone: true,
-                name: true,
-                role: true,
-                password: true,
-            }
-        });
-        if (!user) {
-            throw new Error(MessageHandler.ERR001);
-        }
-
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            throw new Error(MessageHandler.ERR001);
-        }
-
-        const payload = { id: user.id, phone: user.phone, name: user.name, role: user.role };
-        const token = jwt.sign(payload, Constant.JWT_SECRET, { expiresIn: '7d' });
-        return { fingerprint: true, user: { id: user.id, phone: user.phone, name: user.name }, token };
-
+        return this.performLogin(req, body, true);
     }
 
     async doLogin(req: any, body: LoginDto): Promise<any> {
+        return this.performLogin(req, body, false);
+    }
 
+    private async performLogin(req: any, body: LoginDto, isAdmin: boolean): Promise<any> {
         const { username, password } = body;
         const email_hash = hashText(username);
+        
+        const where: any = { email_hash };
+        if (isAdmin) {
+            where.role = ADMIN;
+        }
+
         const user = await this.userRepository.findOne({
-            where: { email_hash },
+            where,
             select: {
                 id: true,
                 phone: true,
                 name: true,
                 role: true,
                 password: true,
+                avatar: true,
                 fingerprint: true,
             }
         });
@@ -73,13 +58,33 @@ export class LoginUseCase {
             throw new Error(MessageHandler.ERR001);
         }
 
-        const fingerprintHash = req?.fingerprint?.hash;
-        if (fingerprintHash) {
-            await this.userRepository.update(user.id, { fingerprint: fingerprintHash });
+        const tokenPayload: any = { id: user.id, name: user.name, role: user.role };
+        
+        if (isAdmin) {
+            tokenPayload.phone = user.phone;
+        } else {
+            tokenPayload.email = username; // username is the email
+            tokenPayload.avatar = user.avatar;
+            
+            const fingerprintHash = req?.fingerprint?.hash;
+            if (fingerprintHash) {
+                await this.userRepository.update(user.id, { fingerprint: fingerprintHash });
+            }
         }
-        const payload = { id: user.id, email: user.email, name: user.name, role: user.role, avatar: user.avatar };
-        const token = jwt.sign(payload, Constant.JWT_SECRET, { expiresIn: '7d' });
-        return { fingerprint: Boolean(fingerprintHash), user: { id: user.id, name: user.name, avatar: user.avatar }, token };
 
+        const token = jwt.sign(tokenPayload, Constant.JWT_SECRET, { expiresIn: '7d' });
+        
+        const responseUser: any = { id: user.id, name: user.name };
+        if (isAdmin) {
+            responseUser.phone = user.phone;
+        } else {
+            responseUser.avatar = user.avatar;
+        }
+
+        return { 
+            fingerprint: !isAdmin && Boolean(req?.fingerprint?.hash), 
+            user: responseUser, 
+            token 
+        };
     }
 }

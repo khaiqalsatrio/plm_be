@@ -1,0 +1,10 @@
+- [x] Mendefinisikan method privat `performLogin(username, password, isAdmin)` di `LoginUseCase`.
+- [x] Pindahkan logika hash `email_hash` ke dalam `performLogin`.
+- [x] Sertakan pemilihan role `ADMIN` sesuai nilai `isAdmin`.
+- [x] Sertakan verifikasi `bcrypt.compare`.
+- [x] Pastikan JWT payload disesuaikan untuk admin (phone) vs user biasa (email, avatar).
+- [x] Masukkan logika perekaman fingerprint untuk user biasa (jika bukan admin).
+- [x] Update `doLogin` agar memanggil `performLogin(req, body, false)`.
+- [x] Update `doLoginAdmin` agar memanggil `performLogin(req, body, true)`.
+- [x] Verifikasi build sistem dengan `npm run build`.
+- [x] Verifikasi login user dan admin secara fungsional.

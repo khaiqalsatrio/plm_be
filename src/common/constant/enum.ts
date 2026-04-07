@@ -124,6 +124,7 @@ export enum DocumentType {
   ARCHITECTURE_DIAGRAM = 'architecture_diagram',
   LEGAL_OPINION = 'legal_opinion',
   COMPLIANCE_CHECKLIST = 'compliance_checklist',
+  SIGNED_DOCUMENT = 'signed_document',
   OTHER = 'other',
 }
 

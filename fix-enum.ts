@@ -16,7 +16,7 @@ async function fixEnum() {
     await client.connect();
     console.log('Terhubung ke database...');
     
-    const rolesToAdd = ['business_reviewer', 'legal_reviewer', 'product_manager'];
+    const rolesToAdd = ['business_reviewer', 'legal_reviewer', 'product_manager', 'business_owner', 'approver'];
     
     for (const role of rolesToAdd) {
       const checkQuery = `SELECT 1 FROM pg_type t 

@@ -1,0 +1,11 @@
+- [ ] Create `SubmitFinalValidationDto` in `src/modules/approvers/dto/approver.dto.ts`
+- [ ] Create `SubmitFinalValidationUseCase` in `src/modules/approvers/usecases/`
+    - [ ] `execute(id: string, dto: SubmitFinalValidationDto, logged: User)`:
+        - [ ] Find assessment with relation `attachments`.
+        - [ ] **STRICT VALIDATION**: Cek apakah ada lampiran dengan tipe `SIGNED_DOCUMENT` (opsional jika doc type belum di-define, bisa gunakan pengecekan file).
+        - [ ] Update `ProductAssessment.overall_status` -> `approved` / `rejected`.
+        - [ ] Update `approved_by` -> `logged.id`.
+        - [ ] Update `approved_at` -> `now()`.
+        - [ ] Record Audit Log.
+- [ ] Update `ApproverController`: `POST /assessment/:id/validate`
+    - [ ] Add `@Roles(APPROVER)`.

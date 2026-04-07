@@ -49,15 +49,15 @@ export class SubmitFinalDecisionUseCase {
       await queryRunner.manager.save(approval);
 
       // 2. Update ProductAssessment status
-      if (dto.decision === ApprovalDecision.APPROVE || dto.decision === ApprovalDecision.APPROVE_WITH_CONDITION) {
-        assessment.overall_status = AssessmentStatus.APPROVED;
-        assessment.approved_by = logged.id;
-        assessment.approved_at = new Date();
-      } else if (dto.decision === ApprovalDecision.REJECT) {
+      // Note: In the new workflow, PM decision is a recommendation. 
+      // Overall status remains 'in_review' for Approver to finalize.
+      if (dto.decision === ApprovalDecision.REJECT) {
         assessment.overall_status = AssessmentStatus.REJECTED;
       } else if (dto.decision === ApprovalDecision.NEED_REVISION) {
         assessment.overall_status = AssessmentStatus.NEED_REVISION;
       }
+      // If decision is APPROVE or APPROVE_WITH_CONDITION, we keep status as IN_REVIEW 
+      // as it's waiting for Approver Final Validation.
       
       assessment.decision_note = dto.decision_note;
       await queryRunner.manager.save(assessment);

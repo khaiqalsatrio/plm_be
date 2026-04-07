@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 
 import MessageHandler from 'src/common/message';
-import { RateLimitGuard } from 'src/guards/rate-limit.guard';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 
@@ -27,7 +27,7 @@ export class OauthController {
 
   @Post('google')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(RateLimitGuard)
+  @UseGuards(ThrottlerGuard)
   async loginGoogle(@Res() res, @Req() req, @Body() body: GoogleOauthDto) {
     try {
       const data = await this.googleOauthUseCase.doGoogleLogin(

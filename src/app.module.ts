@@ -2,6 +2,7 @@ import {
   Module,
 } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import Constant from './common/constant';
@@ -30,6 +31,8 @@ import { TechnicalReviewModule } from './modules/technical-reviews/technical-rev
 import { BusinessReviewModule } from './modules/business-reviews/business-review.module';
 import { LegalReviewModule } from './modules/legal-reviews/legal-review.module';
 import { ProductManagerModule } from './modules/product-managers/product-manager.module';
+import { BusinessOwnerModule } from './modules/business-owners/business-owner.module';
+import { ApproverModule } from './modules/approvers/approver.module';
 import { CategoryModule } from './modules/categories/category.module';
 import { MenuModule } from './modules/menus/menu.module';
 import { NotificationModule } from './modules/notifications/notification.module';
@@ -41,6 +44,10 @@ import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([{
+        ttl: Constant.RATE_LIMIT_WINDOW_MS,
+        limit: Constant.RATE_LIMIT_MAX_ATTEMPTS,
+    }]),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: Constant.DB_HOST,
@@ -84,6 +91,8 @@ import { UsersModule } from './modules/users/users.module';
     BusinessReviewModule,
     LegalReviewModule,
     ProductManagerModule,
+    BusinessOwnerModule,
+    ApproverModule,
     ProductAssessmentModule,
   ],
   providers: [

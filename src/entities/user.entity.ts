@@ -1,9 +1,10 @@
 import { decryptText } from 'pii-cyclops';
-import { AfterLoad, Column, Entity, Index } from 'typeorm';
+import { AfterLoad, Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 
 import { PII_ENCRYPTION_KEY } from 'src/common/constant/constant';
 
 import { BaseEntity } from './base.entity';
+import { MasterBusinessUnit } from './master-business-unit.entity';
 
 @Entity('users')
 @Index(['name', 'email', 'phone'])
@@ -34,10 +35,17 @@ export class User extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: ['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager'],
+    enum: ['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager', 'business_owner', 'approver'],
     default: 'user',
   })
   public role: string;
+
+  @Column({ name: 'business_unit_id', type: 'uuid', nullable: true })
+  public business_unit_id: string;
+
+  @ManyToOne(() => MasterBusinessUnit)
+  @JoinColumn({ name: 'business_unit_id' })
+  public business_unit: MasterBusinessUnit;
 
   @Column({ type: 'json', nullable: true })
   public fingerprint: any;

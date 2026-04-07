@@ -1,0 +1,6 @@
+- [ ] Create `GetApproverAssessmentDetailUseCase` in `src/modules/approvers/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment with all relations: `product`, `reviews`, `responses`, `approvals`, `attachments`.
+        - [ ] Ensure `responses` are loaded for full detail access.
+- [ ] Update `ApproverController`: `GET /assessment/:id`
+    - [ ] Add `@Roles(APPROVER)`.

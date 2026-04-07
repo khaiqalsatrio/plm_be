@@ -1,0 +1,6 @@
+- [ ] Create `GetTemplatesUseCase` in `src/modules/master-data/usecases/`
+    - [ ] `execute()`:
+        - [ ] Find all `AssessmentTemplate` where `is_active: true`.
+        - [ ] Select only necessary columns for dropdown.
+- [ ] Update `MasterDataController`: `GET /templates`
+- [ ] Update `MasterDataModule`: Register `AssessmentTemplate` in `TypeOrmModule.forFeature` and include `GetTemplatesUseCase` in providers.

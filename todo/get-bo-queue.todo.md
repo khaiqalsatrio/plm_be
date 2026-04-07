@@ -1,0 +1,8 @@
+- [ ] Create `GetBusinessOwnerQueueUseCase` in `src/modules/business-owners/usecases/`
+    - [ ] `execute(page: number, limit: number, logged: User)`:
+        - [ ] Find assessments with relation `product`.
+        - [ ] Filter `product.business_unit_id = logged.business_unit_id`.
+        - [ ] Filter `overall_status != 'draft'`.
+- [ ] Update `BusinessOwnerController`: `GET /queue`
+    - [ ] Add `@Roles(BUSINESS_OWNER)`.
+    - [ ] Handle pagination query.
