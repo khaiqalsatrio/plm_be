@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { AuditActionType } from '../common/constant/enum';
@@ -29,6 +29,7 @@ export class AssessmentAuditLog extends BaseEntity {
   @Column({ name: 'note', type: 'text', nullable: true })
   public note: string;
 
+  @Index()
   @Column({ name: 'actor_id', type: 'uuid', nullable: true })
   public actor_id: string;
 }

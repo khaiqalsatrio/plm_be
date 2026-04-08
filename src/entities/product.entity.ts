@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { MasterProductCategory } from './master-product-category.entity';
@@ -27,9 +27,11 @@ export class Product extends BaseEntity {
   @JoinColumn({ name: 'business_unit_id' })
   public business_unit: MasterBusinessUnit;
 
+  @Index()
   @Column({ name: 'owner_id', type: 'uuid', nullable: true })
   public owner_id: string;
 
+  @Index()
   @Column({ name: 'product_manager_id', type: 'uuid', nullable: true })
   public product_manager_id: string;
 

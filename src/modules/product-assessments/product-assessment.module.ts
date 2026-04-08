@@ -12,6 +12,7 @@ import { SubmitAssessmentUseCase } from './usecases/submit-assessment.usecase';
 import { UpdateAssessmentUseCase } from './usecases/update-assessment.usecase';
 import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usecase';
 import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.usecase';
+import { AssessmentAttachmentModule } from './assessment-attachment/assessment-attachment.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.use
       ProductAssessment,
       AssessmentAuditLog,
     ]),
+    AssessmentAttachmentModule,
   ],
   controllers: [ProductAssessmentController],
   providers: [

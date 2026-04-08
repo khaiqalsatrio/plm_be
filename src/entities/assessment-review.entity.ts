@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { SectionType, ReviewStatus, RiskLevel, ReviewRecommendation } from '../common/constant/enum';
@@ -20,7 +20,8 @@ export class AssessmentReview extends BaseEntity {
   })
   public review_type: SectionType;
 
-  @Column({ name: 'reviewer_id', type: 'uuid' })
+  @Index()
+  @Column({ name: 'reviewer_id', type: 'uuid', nullable: true })
   public reviewer_id: string;
 
   @Column({ 

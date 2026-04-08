@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { DocumentType } from '../common/constant/enum';
@@ -41,6 +41,7 @@ export class AssessmentAttachment extends BaseEntity {
   })
   public document_type: DocumentType;
 
+  @Index()
   @Column({ name: 'uploaded_by', type: 'uuid', nullable: true })
   public uploaded_by: string;
 

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { IsString, IsInt, IsEmail, IsDecimal, IsEnum, IsOptional } from 'class-validator';
 
 export class UserDto {
@@ -21,6 +22,7 @@ export class UserDto {
     public avatar?: string;
 
     @IsInt()
+    @Type(() => Number)
     @IsOptional()
     @ApiProperty({
         description: 'The active status of the user (0 for inactive, 1 for active)',

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, Index } from 'typeorm';
 import { AssessmentApproval } from './assessment-approval.entity';
 import { AssessmentAttachment } from './assessment-attachment.entity';
 import { AssessmentAuditLog } from './assessment-audit-log.entity';
@@ -127,12 +127,14 @@ export class ProductAssessment extends BaseEntity {
   })
   public recommendation: AssessmentRecommendation;
 
+  @Index()
   @Column({ name: 'submitted_by', type: 'uuid', nullable: true })
   public submitted_by: string;
 
   @Column({ name: 'submitted_at', type: 'timestamp', nullable: true })
   public submitted_at: Date;
 
+  @Index()
   @Column({ name: 'approved_by', type: 'uuid', nullable: true })
   public approved_by: string;
 

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, Index } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { ApprovalDecision } from '../common/constant/enum';
@@ -12,7 +12,8 @@ export class AssessmentApproval extends BaseEntity {
   @JoinColumn({ name: 'assessment_id' })
   public product_assessment: ProductAssessment;
 
-  @Column({ name: 'approver_id', type: 'uuid' })
+  @Index()
+  @Column({ name: 'approver_id', type: 'uuid', nullable: true })
   public approver_id: string;
 
   @Column({ 
