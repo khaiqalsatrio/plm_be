@@ -71,7 +71,7 @@ export class SubmitTechnicalReviewUseCase {
           count++;
         }
       });
-      const finalScore = count > 0 ? totalScore / count : 0;
+      const finalScore = dto.score !== undefined ? dto.score : (count > 0 ? totalScore / count : 0);
 
       // 3. Update AssessmentReview
       let review = await queryRunner.manager.findOne(AssessmentReview, {

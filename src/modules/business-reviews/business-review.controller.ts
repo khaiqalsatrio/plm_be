@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
 
-import { JWT_ACCESS_TOKEN, BUSINESS_REVIEWER } from 'src/common/constant/constant';
+import { JWT_ACCESS_TOKEN, BUSINESS_REVIEWER, REVIEWER } from 'src/common/constant/constant';
 import MessageHandler from 'src/common/message';
 import { Roles } from 'src/guards/roles.decorator';
 import { RolesGuard } from 'src/guards/roles.guard';
@@ -44,10 +44,10 @@ export class BusinessReviewController {
     private readonly getUrlUseCase: GetAttachmentUrlUseCase,
   ) {}
 
-  @Get()
+  @Get('queue')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles(BUSINESS_REVIEWER)
+  @Roles(BUSINESS_REVIEWER, REVIEWER)
   async getQueue(@Res() res, @Query() query: PaginateDto & { status?: string }) {
     try {
       const logged = res.locals.logged;
@@ -62,7 +62,7 @@ export class BusinessReviewController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles(BUSINESS_REVIEWER)
+  @Roles(BUSINESS_REVIEWER, REVIEWER)
   async getDetail(@Res() res, @Param('id') id: string) {
     try {
       const logged = res.locals.logged;

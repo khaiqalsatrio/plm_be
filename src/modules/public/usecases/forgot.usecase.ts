@@ -19,8 +19,19 @@ export class ForgotUseCase {
     async doForgotPassword(email: string): Promise<any> {
         try {
             const generatedPassword = Math.random().toString(36).slice(-8);
-            const email_hash = hashText(email);
-            const user = await this.userRepository.findOne({ where: { email_hash } });
+            const trimmedEmail = email?.trim();
+            let email_hash = hashText(trimmedEmail);
+            let user = await this.userRepository.findOne({ where: { email_hash } });
+
+            // Fallback for case-insensitivity
+            if (!user && trimmedEmail) {
+                const lowerEmail = trimmedEmail.toLowerCase();
+                if (lowerEmail !== trimmedEmail) {
+                    email_hash = hashText(lowerEmail);
+                    user = await this.userRepository.findOne({ where: { email_hash } });
+                }
+            }
+
             if (!user) {
                 throw new Error(MessageHandler.ERR005);
             }

@@ -1,7 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsUUID, IsArray, IsString, IsNumber, IsEnum, IsOptional, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { RiskLevel, AssessmentRecommendation } from 'src/common/constant/enum';
+import { RiskLevel, ReviewRecommendation } from 'src/common/constant/enum';
 
 export class LegalResponseItem {
   @IsUUID()
@@ -35,9 +35,14 @@ export class SubmitLegalReviewDto {
   @ApiProperty({ enum: RiskLevel, example: RiskLevel.LOW })
   risk_level: RiskLevel;
 
-  @IsEnum(AssessmentRecommendation)
-  @ApiProperty({ enum: AssessmentRecommendation, example: AssessmentRecommendation.RECOMMENDED })
-  recommendation: AssessmentRecommendation;
+  @IsEnum(ReviewRecommendation)
+  @ApiProperty({ enum: ReviewRecommendation, example: ReviewRecommendation.PASS })
+  recommendation: ReviewRecommendation;
+
+  @ApiPropertyOptional({ example: 85 })
+  @IsOptional()
+  @IsNumber()
+  score?: number;
 }
 
 export class ReturnLegalReviewDto {

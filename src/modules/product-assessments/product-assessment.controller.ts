@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { JWT_ACCESS_TOKEN, PRODUCT_OWNER } from 'src/common/constant/constant';
+import { JWT_ACCESS_TOKEN, PRODUCT_OWNER, TECHNICAL_REVIEWER, LEGAL_REVIEWER, BUSINESS_REVIEWER, REVIEWER, APPROVER, PRODUCT_MANAGER, BUSINESS_OWNER } from 'src/common/constant/constant';
 import MessageHandler from 'src/common/message';
 import { Roles } from 'src/guards/roles.decorator';
 import { RolesGuard } from 'src/guards/roles.guard';
@@ -60,7 +60,7 @@ export class ProductAssessmentController {
   @Get()
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles(PRODUCT_OWNER)
+  @Roles(PRODUCT_OWNER, APPROVER, PRODUCT_MANAGER, BUSINESS_OWNER, TECHNICAL_REVIEWER, LEGAL_REVIEWER, BUSINESS_REVIEWER)
   async findAll(@Res() res, @Query() query: PaginateDto & { status?: string }) {
     try {
       const logged = res.locals.logged;
@@ -75,7 +75,7 @@ export class ProductAssessmentController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles(PRODUCT_OWNER)
+  @Roles(PRODUCT_OWNER, TECHNICAL_REVIEWER, LEGAL_REVIEWER, BUSINESS_REVIEWER, REVIEWER, APPROVER, PRODUCT_MANAGER, BUSINESS_OWNER)
   async findOne(@Res() res, @Param('id') id: string) {
     try {
       const logged = res.locals.logged;

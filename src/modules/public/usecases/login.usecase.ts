@@ -28,26 +28,46 @@ export class LoginUseCase {
     }
 
     private async performLogin(req: any, body: LoginDto, isAdmin: boolean): Promise<any> {
-        const { username, password } = body;
-        const email_hash = hashText(username);
+        const { password } = body;
+        const trimmedUsername = body.username?.trim();
+        const email_hash = hashText(trimmedUsername);
         
         const where: any = { email_hash };
         if (isAdmin) {
             where.role = ADMIN;
         }
 
-        const user = await this.userRepository.findOne({
+        const selectOptions: any = {
+            id: true,
+            phone: true,
+            name: true,
+            role: true,
+            password: true,
+            avatar: true,
+            fingerprint: true,
+        };
+
+        let user = await this.userRepository.findOne({
             where,
-            select: {
-                id: true,
-                phone: true,
-                name: true,
-                role: true,
-                password: true,
-                avatar: true,
-                fingerprint: true,
-            }
+            select: selectOptions
         });
+
+        // Fallback: Jika tidak ditemukan, coba dengan format huruf kecil (untuk backward compatibility)
+        if (!user && trimmedUsername) {
+            const lowerUsername = trimmedUsername.toLowerCase();
+            if (lowerUsername !== trimmedUsername) {
+                const lowerEmailHash = hashText(lowerUsername);
+                where.email_hash = lowerEmailHash;
+                user = await this.userRepository.findOne({
+                    where,
+                    select: selectOptions
+                });
+                
+                if (user) {
+                    console.log(`[LOGIN] Fallback normalization triggered for: ${lowerUsername}`);
+                }
+            }
+        }
 
         if (!user) {
             throw new Error(MessageHandler.ERR001);
@@ -63,7 +83,7 @@ export class LoginUseCase {
         if (isAdmin) {
             tokenPayload.phone = user.phone;
         } else {
-            tokenPayload.email = username; // username is the email
+            tokenPayload.email = trimmedUsername; // username is the email
             tokenPayload.avatar = user.avatar;
             
             const fingerprintHash = req?.fingerprint?.hash;

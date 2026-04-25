@@ -4,6 +4,7 @@ import { ProductAssessment } from './product-assessment.entity';
 import { MasterProductCategory } from './master-product-category.entity';
 import { MasterBusinessUnit } from './master-business-unit.entity';
 import { ProductType, ProductStage, ProductPriority, ProductStatus } from '../common/constant/enum';
+import { User } from './user.entity';
 
 @Entity('products')
 export class Product extends BaseEntity {
@@ -31,9 +32,17 @@ export class Product extends BaseEntity {
   @Column({ name: 'owner_id', type: 'uuid', nullable: true })
   public owner_id: string;
 
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'owner_id' })
+  public owner: User;
+
   @Index()
   @Column({ name: 'product_manager_id', type: 'uuid', nullable: true })
   public product_manager_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'product_manager_id' })
+  public product_manager: User;
 
   @Column({ 
     name: 'product_type', 

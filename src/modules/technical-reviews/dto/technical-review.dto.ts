@@ -74,6 +74,11 @@ export class SubmitTechnicalReviewDto extends SaveTechnicalReviewDto {
   @ApiProperty({ enum: ReviewRecommendation })
   @IsEnum(ReviewRecommendation)
   recommendation: ReviewRecommendation;
+
+  @ApiPropertyOptional({ example: 85 })
+  @IsOptional()
+  @IsNumber()
+  score?: number;
 }
 
 export class ReturnTechnicalReviewDto {

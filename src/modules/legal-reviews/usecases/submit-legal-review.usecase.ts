@@ -34,8 +34,8 @@ export class SubmitLegalReviewUseCase {
       where: { assessment_id: id, reviewer_type: 'legal' as any },
     });
 
-    let totalScore = 0;
-    if (responses.length > 0) {
+    let totalScore = dto.score !== undefined ? dto.score : 0;
+    if (dto.score === undefined && responses.length > 0) {
       const sum = responses.reduce((acc, curr) => acc + (curr.score || 0), 0);
       totalScore = sum / responses.length;
     }
