@@ -1,12 +1,13 @@
-import { DataSource } from 'typeorm';
 import * as fs from 'fs';
 import * as path from 'path';
+import { DataSource } from 'typeorm';
+
 import Constant from '../common/constant';
-import { AssessmentTemplate } from '../entities/assessment-template.entity';
-import { AssessmentSection } from '../entities/assessment-section.entity';
+import { ProductType, SectionType, ScoreType, QuestionType, AnswerType } from '../common/constant/enum';
 import { AssessmentCriteria } from '../entities/assessment-criteria.entity';
 import { AssessmentQuestion } from '../entities/assessment-question.entity';
-import { ProductType, SectionType, ScoreType, QuestionType, AnswerType } from '../common/constant/enum';
+import { AssessmentSection } from '../entities/assessment-section.entity';
+import { AssessmentTemplate } from '../entities/assessment-template.entity';
 
 async function seed() {
   const dataSource = new DataSource({

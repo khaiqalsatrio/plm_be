@@ -8,9 +8,9 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 import MessageHandler from 'src/common/message';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 

@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany } from 'typeorm';
+
 import { AssessmentSection } from './assessment-section.entity';
 import { BaseEntity } from './base.entity';
 import { ProductType } from '../common/constant/enum';

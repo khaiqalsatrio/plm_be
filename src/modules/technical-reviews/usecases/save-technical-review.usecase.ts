@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
-import { AssessmentResponse } from 'src/entities/assessment-response.entity';
-import { AssessmentReview } from 'src/entities/assessment-review.entity';
+
 import { ReviewerType, SectionType } from 'src/common/constant/enum';
 import { AuthenticatedUser } from 'src/common/types/auth-context.type';
+import { AssessmentResponse } from 'src/entities/assessment-response.entity';
+import { AssessmentReview } from 'src/entities/assessment-review.entity';
+
 import { SaveTechnicalReviewDto } from '../dto/technical-review.dto';
 
 @Injectable()
@@ -54,7 +56,7 @@ export class SaveTechnicalReviewDraftUseCase {
       }
 
       // 2. Update Review Summary (Draft)
-      let review = await queryRunner.manager.findOne(AssessmentReview, {
+      const review = await queryRunner.manager.findOne(AssessmentReview, {
         where: { assessment_id: id, review_type: SectionType.TECHNICAL },
       });
 

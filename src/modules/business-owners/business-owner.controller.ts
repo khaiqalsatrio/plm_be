@@ -18,9 +18,9 @@ import { PaginateDto } from 'src/libraries/common/search.dto';
 import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 
-import { GetBusinessOwnerQueueUseCase } from './usecases/get-business-owner-queue.usecase';
 import { GetBusinessOwnerAssessmentDetailUseCase } from './usecases/get-business-owner-assessment-detail.usecase';
 import { GetBusinessOwnerDashboardStatsUseCase } from './usecases/get-business-owner-dashboard-stats.usecase';
+import { GetBusinessOwnerQueueUseCase } from './usecases/get-business-owner-queue.usecase';
 
 @ApiTags('Business Owner Workspace')
 @ApiBearerAuth(JWT_ACCESS_TOKEN)

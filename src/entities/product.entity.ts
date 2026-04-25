@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, Index } from 'typeorm';
+
 import { BaseEntity } from './base.entity';
-import { ProductAssessment } from './product-assessment.entity';
-import { MasterProductCategory } from './master-product-category.entity';
 import { MasterBusinessUnit } from './master-business-unit.entity';
-import { ProductType, ProductStage, ProductPriority, ProductStatus } from '../common/constant/enum';
+import { MasterProductCategory } from './master-product-category.entity';
+import { ProductAssessment } from './product-assessment.entity';
 import { User } from './user.entity';
+import { ProductType, ProductStage, ProductPriority, ProductStatus } from '../common/constant/enum';
 
 @Entity('products')
 export class Product extends BaseEntity {

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { MasterRiskLevel } from 'src/entities/master-risk-level.entity';
 
 @Injectable()

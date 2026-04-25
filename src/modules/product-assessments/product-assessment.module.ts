@@ -5,14 +5,14 @@ import { AssessmentAuditLog } from 'src/entities/assessment-audit-log.entity';
 import { ProductAssessment } from 'src/entities/product-assessment.entity';
 import { Product } from 'src/entities/product.entity';
 
+import { AssessmentAttachmentModule } from './assessment-attachment/assessment-attachment.module';
 import { ProductAssessmentController } from './product-assessment.controller';
 import { CreateAssessmentUseCase } from './usecases/create-assessment.usecase';
+import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usecase';
+import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.usecase';
 import { GetAssessmentsUseCase } from './usecases/get-assessments.usecase';
 import { SubmitAssessmentUseCase } from './usecases/submit-assessment.usecase';
 import { UpdateAssessmentUseCase } from './usecases/update-assessment.usecase';
-import { DuplicateAssessmentUseCase } from './usecases/duplicate-assessment.usecase';
-import { ExportAssessmentPdfUseCase } from './usecases/export-assessment-pdf.usecase';
-import { AssessmentAttachmentModule } from './assessment-attachment/assessment-attachment.module';
 
 @Module({
   imports: [

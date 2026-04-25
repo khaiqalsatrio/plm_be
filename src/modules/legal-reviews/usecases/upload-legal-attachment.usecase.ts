@@ -1,11 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { DocumentType } from 'src/common/constant/enum';
+import { AuthenticatedUser } from 'src/common/types/auth-context.type';
 import { AssessmentAttachment } from 'src/entities/assessment-attachment.entity';
 import { ProductAssessment } from 'src/entities/product-assessment.entity';
 import MinioClient from 'src/libraries/minio';
-import { AuthenticatedUser } from 'src/common/types/auth-context.type';
-import { DocumentType } from 'src/common/constant/enum';
 
 @Injectable()
 export class UploadLegalAttachmentUseCase {

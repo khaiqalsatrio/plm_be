@@ -5,14 +5,14 @@ import { Repository } from 'typeorm';
 import { ADMIN } from 'src/common/constant/constant';
 import { LoggedDto } from 'src/common/dtos/logged.dto';
 import MessageHandler from 'src/common/message';
-import { User } from 'src/entities/user.entity';
-import { Product } from 'src/entities/product.entity';
-import { ProductAssessment } from 'src/entities/product-assessment.entity';
-import { AssessmentReview } from 'src/entities/assessment-review.entity';
-import { AssessmentAttachment } from 'src/entities/assessment-attachment.entity';
 import { AssessmentApproval } from 'src/entities/assessment-approval.entity';
-import { AssessmentComment } from 'src/entities/assessment-comment.entity';
+import { AssessmentAttachment } from 'src/entities/assessment-attachment.entity';
 import { AssessmentAuditLog } from 'src/entities/assessment-audit-log.entity';
+import { AssessmentComment } from 'src/entities/assessment-comment.entity';
+import { AssessmentReview } from 'src/entities/assessment-review.entity';
+import { ProductAssessment } from 'src/entities/product-assessment.entity';
+import { Product } from 'src/entities/product.entity';
+import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class DeleteUserUseCase {

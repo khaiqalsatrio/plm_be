@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProductAssessment } from 'src/entities/product-assessment.entity';
-import { AssessmentResponse } from 'src/entities/assessment-response.entity';
+
 import { ReviewStatus } from 'src/common/constant/enum';
 import { AuthenticatedUser } from 'src/common/types/auth-context.type';
+import { AssessmentResponse } from 'src/entities/assessment-response.entity';
+import { ProductAssessment } from 'src/entities/product-assessment.entity';
+
 import { SaveLegalReviewDto } from '../dto/legal-review.dto';
 
 @Injectable()

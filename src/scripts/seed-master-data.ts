@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+
 import Constant from '../common/constant';
 import { MasterBusinessUnit } from '../entities/master-business-unit.entity';
 import { MasterProductCategory } from '../entities/master-product-category.entity';

@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+
 import { AssessmentCriteria } from './assessment-criteria.entity';
 import { BaseEntity } from './base.entity';
 import { QuestionType, AnswerType } from '../common/constant/enum';

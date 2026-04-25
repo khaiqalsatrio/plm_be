@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsUUID, IsArray, IsString, IsNumber, IsEnum, IsOptional, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsUUID, IsArray, IsString, IsNumber, IsEnum, IsOptional, ValidateNested } from 'class-validator';
+
 import { ReviewStatus, RiskLevel, ReviewRecommendation } from 'src/common/constant/enum';
 
 export class BusinessResponseItem {

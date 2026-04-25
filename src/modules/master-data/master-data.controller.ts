@@ -17,9 +17,9 @@ import { respond } from 'src/libraries/respond';
 
 import { GetBusinessUnitsUseCase } from './usecases/get-business-units.usecase';
 import { GetProductCategoriesUseCase } from './usecases/get-product-categories.usecase';
-import { GetTemplatesUseCase } from './usecases/get-templates.usecase';
-import { GetTemplateDetailUseCase } from './usecases/get-template-detail.usecase';
 import { GetRiskLevelsUseCase } from './usecases/get-risk-levels.usecase';
+import { GetTemplateDetailUseCase } from './usecases/get-template-detail.usecase';
+import { GetTemplatesUseCase } from './usecases/get-templates.usecase';
 
 @ApiTags('Master Data')
 @ApiBearerAuth(JWT_ACCESS_TOKEN)

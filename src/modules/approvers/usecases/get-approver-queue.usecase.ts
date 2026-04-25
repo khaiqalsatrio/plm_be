@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProductAssessment } from 'src/entities/product-assessment.entity';
+
 import { AssessmentStatus, DocumentType } from 'src/common/constant/enum';
+import { ProductAssessment } from 'src/entities/product-assessment.entity';
 
 @Injectable()
 export class GetApproverQueueUseCase {

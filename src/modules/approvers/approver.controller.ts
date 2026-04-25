@@ -20,10 +20,10 @@ import { PaginateDto } from 'src/libraries/common/search.dto';
 import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 
-import { GetApproverQueueUseCase } from './usecases/get-approver-queue.usecase';
-import { GetApproverAssessmentDetailUseCase } from './usecases/get-approver-assessment-detail.usecase';
-import { SubmitFinalValidationUseCase } from './usecases/submit-final-validation.usecase';
 import { SubmitFinalValidationDto } from './dto/approver.dto';
+import { GetApproverAssessmentDetailUseCase } from './usecases/get-approver-assessment-detail.usecase';
+import { GetApproverQueueUseCase } from './usecases/get-approver-queue.usecase';
+import { SubmitFinalValidationUseCase } from './usecases/submit-final-validation.usecase';
 
 @ApiTags('Approver Workspace')
 @ApiBearerAuth(JWT_ACCESS_TOKEN)

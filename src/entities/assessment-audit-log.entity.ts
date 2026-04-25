@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, Index } from 'typeorm';
+
 import { BaseEntity } from './base.entity';
 import { ProductAssessment } from './product-assessment.entity';
 import { AuditActionType } from '../common/constant/enum';

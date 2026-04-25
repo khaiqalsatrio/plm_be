@@ -1,13 +1,14 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, Index } from 'typeorm';
+
 import { AssessmentApproval } from './assessment-approval.entity';
 import { AssessmentAttachment } from './assessment-attachment.entity';
 import { AssessmentAuditLog } from './assessment-audit-log.entity';
 import { AssessmentComment } from './assessment-comment.entity';
 import { AssessmentResponse } from './assessment-response.entity';
 import { AssessmentReview } from './assessment-review.entity';
+import { AssessmentTemplate } from './assessment-template.entity';
 import { BaseEntity } from './base.entity';
 import { Product } from './product.entity';
-import { AssessmentTemplate } from './assessment-template.entity';
 import { AssessmentType, AssessmentStatus, ReviewStatus, RiskLevel, AssessmentRecommendation } from '../common/constant/enum';
 
 @Entity('product_assessments')

@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { AuthenticatedUser } from 'src/common/types/auth-context.type';
 import { AssessmentAttachment } from 'src/entities/assessment-attachment.entity';
 import MinioClient from 'src/libraries/minio';
-import { AuthenticatedUser } from 'src/common/types/auth-context.type';
 
 @Injectable()
 export class GetLegalAttachmentUrlUseCase {

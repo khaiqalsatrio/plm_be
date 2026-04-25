@@ -21,8 +21,8 @@ import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 
 import { SubmitFinalDecisionDto } from './dto/product-manager.dto';
-import { GetProductManagerQueueUseCase } from './usecases/get-product-manager-queue.usecase';
 import { GetAssessmentApprovalDetailUseCase } from './usecases/get-assessment-approval-detail.usecase';
+import { GetProductManagerQueueUseCase } from './usecases/get-product-manager-queue.usecase';
 import { SubmitFinalDecisionUseCase } from './usecases/submit-final-decision.usecase';
 
 @ApiTags('Product Manager Workspace')

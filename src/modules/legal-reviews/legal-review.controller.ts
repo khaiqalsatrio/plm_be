@@ -21,14 +21,14 @@ import { PaginateDto } from 'src/libraries/common/search.dto';
 import logger from 'src/libraries/logger';
 import { respond } from 'src/libraries/respond';
 
-import { GetLegalQueueUseCase } from './usecases/get-legal-queue.usecase';
-import { StartLegalReviewUseCase } from './usecases/start-legal-review.usecase';
-import { SaveLegalReviewUseCase } from './usecases/save-legal-review.usecase';
-import { SubmitLegalReviewUseCase } from './usecases/submit-legal-review.usecase';
-import { ReturnLegalReviewUseCase } from './usecases/return-legal-review.usecase';
-import { UploadLegalAttachmentUseCase } from './usecases/upload-legal-attachment.usecase';
-import { GetLegalAttachmentUrlUseCase } from './usecases/get-legal-attachment-url.usecase';
 import { SaveLegalReviewDto, SubmitLegalReviewDto, ReturnLegalReviewDto } from './dto/legal-review.dto';
+import { GetLegalAttachmentUrlUseCase } from './usecases/get-legal-attachment-url.usecase';
+import { GetLegalQueueUseCase } from './usecases/get-legal-queue.usecase';
+import { ReturnLegalReviewUseCase } from './usecases/return-legal-review.usecase';
+import { SaveLegalReviewUseCase } from './usecases/save-legal-review.usecase';
+import { StartLegalReviewUseCase } from './usecases/start-legal-review.usecase';
+import { SubmitLegalReviewUseCase } from './usecases/submit-legal-review.usecase';
+import { UploadLegalAttachmentUseCase } from './usecases/upload-legal-attachment.usecase';
 
 @ApiTags('Legal Reviewer Workspace')
 @ApiBearerAuth(JWT_ACCESS_TOKEN)
