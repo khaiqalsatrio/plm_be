@@ -1,0 +1,13 @@
+- [ ] Create `SubmitFinalDecisionDto` in `src/modules/product-managers/dto/product-manager.dto.ts`
+- [ ] Create `SubmitFinalDecisionUseCase` in `src/modules/product-managers/usecases/`
+    - [ ] `execute(id: string, dto: SubmitFinalDecisionDto, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] **STRICT VALIDATION**: Jika `technical_status`, `business_status`, atau `legal_status` belum `REVIEWED`, lempar `BadRequestException`.
+        - [ ] Insert/Update `AssessmentApproval`.
+        - [ ] Update `ProductAssessment` status:
+            - `APPROVE` -> `approved`
+            - `REJECT` -> `rejected`
+            - `NEED_REVISION` -> `need_revision`
+        - [ ] Record Audit Log.
+- [ ] Update `ProductManagerController`: `POST /assessment/:id/decision`
+    - [ ] Add `@Roles(PRODUCT_MANAGER)`.

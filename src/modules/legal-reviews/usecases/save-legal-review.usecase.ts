@@ -1,0 +1,64 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { ReviewStatus } from 'src/common/constant/enum';
+import { AuthenticatedUser } from 'src/common/types/auth-context.type';
+import { AssessmentResponse } from 'src/entities/assessment-response.entity';
+import { ProductAssessment } from 'src/entities/product-assessment.entity';
+
+import { SaveLegalReviewDto } from '../dto/legal-review.dto';
+
+@Injectable()
+export class SaveLegalReviewUseCase {
+  constructor(
+    @InjectRepository(ProductAssessment)
+    private readonly assessmentRepo: Repository<ProductAssessment>,
+    @InjectRepository(AssessmentResponse)
+    private readonly responseRepo: Repository<AssessmentResponse>,
+  ) {}
+
+  async execute(id: string, dto: SaveLegalReviewDto, logged: AuthenticatedUser) {
+    const assessment = await this.assessmentRepo.findOne({ where: { id } });
+
+    if (!assessment) {
+      throw new Error('Assessment tidak ditemukan');
+    }
+
+    if (assessment.legal_status === ReviewStatus.FINALIZED) {
+      throw new Error('Review hukum sudah didefinisikan sebagai selesai dan tidak dapat diubah');
+    }
+
+    // Upsert responses
+    for (const item of dto.responses) {
+      let response = await this.responseRepo.findOne({
+        where: {
+          assessment_id: id,
+          criteria_id: item.criteria_id,
+          reviewer_type: 'legal' as any,
+        },
+      });
+
+      if (!response) {
+        response = new AssessmentResponse();
+        response.assessment_id = id;
+        response.criteria_id = item.criteria_id;
+        response.reviewer_type = 'legal' as any;
+        response.created_by = logged.id;
+      }
+
+      response.score = item.score;
+      response.note = item.note;
+      
+      await this.responseRepo.save(response);
+    }
+
+    // Auto-update status to in_progress if not already
+    if (assessment.legal_status === ReviewStatus.NOT_STARTED) {
+      assessment.legal_status = ReviewStatus.IN_PROGRESS;
+      await this.assessmentRepo.save(assessment);
+    }
+
+    return { success: true };
+  }
+}

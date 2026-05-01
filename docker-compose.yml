@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - plm-network
+
+  # Helper service to create buckets automatically
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc alias set myminio http://minio:9000 minio minio123) do echo '...waiting for minio...' && sleep 1; done;
+      /usr/bin/mc mb myminio/tetangga;
+      /usr/bin/mc mb myminio/legal-tetangga;
+      /usr/bin/mc policy set public myminio/tetangga;
+      exit 0;
+      "
+    networks:
+      - plm-network
+
+networks:
+  plm-network:
+    driver: bridge
+
+volumes:
+  minio_data:

@@ -29,6 +29,10 @@ export class UpdateUserUseCase {
       throw new Error(MessageHandler.ERR007);
     }
 
+    if (body.type) {
+      body.role = body.type;
+    }
+
     if (body.email) {
       const email = body.email;
       const email_encrypted = encryptText(email, PII_ENCRYPTION_KEY).encrypted;

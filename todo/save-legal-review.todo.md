@@ -1,0 +1,9 @@
+- [ ] Create `SaveLegalReviewUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] Input: `assessment_id`, `SaveLegalReviewDto`.
+    - [ ] Logic:
+        - [ ] Validasi assessment and status.
+        - [ ] Upsert `AssessmentResponse` for each item.
+        - [ ] reviewer_type: `legal`.
+- [ ] Create `LegalReviewController`: `POST /:id/save`
+- [ ] Register `SaveLegalReviewUseCase` in `LegalReviewModule`.
+- [ ] Create `SaveLegalReviewDto` in `src/modules/legal-reviews/dto/legal-review.dto.ts`.

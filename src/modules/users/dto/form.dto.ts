@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { IsString, IsInt, IsEmail, IsDecimal, IsEnum, IsOptional } from 'class-validator';
 
 export class UserDto {
@@ -21,6 +22,7 @@ export class UserDto {
     public avatar?: string;
 
     @IsInt()
+    @Type(() => Number)
     @IsOptional()
     @ApiProperty({
         description: 'The active status of the user (0 for inactive, 1 for active)',
@@ -56,14 +58,7 @@ export class UserDto {
     })
     public password?: string;
 
-    @IsDecimal()
-    @IsOptional()
-    @ApiProperty({
-        description: 'The rating of the user',
-        example: 4.5,
-        nullable: true,
-    })
-    public rating?: number;
+
 
     @IsEnum(['verified', 'unverified'])
     @IsOptional()
@@ -75,15 +70,24 @@ export class UserDto {
     })
     public status?: string;
 
-    @IsEnum(['user', 'admin'])
+    @IsEnum(['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager', 'business_owner', 'approver'])
     @IsOptional()
     @ApiProperty({
         description: 'The type of the user',
-        enum: ['user', 'admin'],
+        enum: ['user', 'admin', 'product_owner', 'technical_reviewer', 'business_reviewer', 'legal_reviewer', 'product_manager', 'business_owner', 'approver'],
         example: 'user',
         nullable: true,
     })
     public type?: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiProperty({
+        description: 'The business unit id of the user',
+        example: '00000000-0000-0000-0000-000000000000',
+        nullable: true,
+    })
+    public business_unit_id?: string;
 
     @IsString()
     @IsOptional()

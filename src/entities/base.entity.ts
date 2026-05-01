@@ -22,7 +22,7 @@ export abstract class BaseEntity{
     @Column({ type: 'uuid', nullable: true })
     updated_id: string;
 
-    @UpdateDateColumn({ type: 'timestamp', nullable: true })
+    @Column({ type: 'timestamp', nullable: true })
     deleted_at: Date;
 
     @Column({ type: 'varchar', length: 255, nullable: true })

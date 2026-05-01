@@ -1,0 +1,13 @@
+- [ ] Create `SubmitLegalReviewUseCase` in `src/modules/legal-reviews/usecases/`
+    - [ ] `execute(id: string, dto: SubmitLegalReviewDto, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Calculate `total_legal_score` from `AssessmentResponse`.
+        - [ ] Create `AssessmentReview` entries.
+        - [ ] Update `ProductAssessment.legal_status` to `finalized`.
+        - [ ] Update `ProductAssessment.legal_score`
+        - [ ] Update `ProductAssessment.legal_risk_level`.
+        - [ ] Create `AssessmentAuditLog`.
+        - [ ] Save assessment and audit log.
+- [ ] Create `LegalReviewController`: `POST /:id/submit`
+- [ ] Register `SubmitLegalReviewUseCase` in `LegalReviewModule`.
+- [ ] Create `SubmitLegalReviewDto` in `src/modules/legal-reviews/dto/legal-review.dto.ts`.

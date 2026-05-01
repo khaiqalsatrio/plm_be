@@ -1,0 +1,10 @@
+- [ ] Create `ReturnBusinessReviewUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] `execute(id: string, dto: ReturnBusinessReviewDto, logged: User)`:
+        - [ ] Find assessment.
+        - [ ] Update `ProductAssessment.overall_status` to `need_revision`.
+        - [ ] Update `ProductAssessment.business_status` to `returned`.
+        - [ ] Create `AssessmentAuditLog` with reason.
+        - [ ] Save assessment and audit log.
+- [ ] Create `BusinessReviewController`: `POST /:id/return`
+- [ ] Register `ReturnBusinessReviewUseCase` in `BusinessReviewModule`.
+- [ ] Create `ReturnBusinessReviewDto` in `src/modules/business-reviews/dto/business-review.dto.ts`.

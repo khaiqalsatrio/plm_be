@@ -102,7 +102,12 @@ async function bootstrap() {
   });
 
 
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  });
   app.enableVersioning();
   logger.log(
     `Database synchronize is ${Constant.DB_SYNCHRONIZE ? 'enabled' : 'disabled'} for NODE_ENV=${Constant.NODE_ENV}`,

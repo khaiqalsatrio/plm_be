@@ -1,0 +1,7 @@
+- [ ] Create `GetApproverQueueUseCase` in `src/modules/approvers/usecases/`
+    - [ ] `execute(page: number, limit: number, logged: User)`:
+        - [ ] Find assessments with relation `product`, `attachments`, `approvals`.
+        - [ ] Filter by status (ex: NOT `draft`, `submitted`).
+- [ ] Update `ApproverController`: `GET /queue`
+    - [ ] Add `@Roles(APPROVER)`.
+    - [ ] Handle pagination query.

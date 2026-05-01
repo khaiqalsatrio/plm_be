@@ -1,0 +1,10 @@
+- [x] Instalasi `@nestjs/throttler` via npm.
+- [x] Registrasi `ThrottlerModule` di `AppModule.ts`.
+- [x] Gunakan konstanta `RATE_LIMIT_WINDOW_MS` dan `RATE_LIMIT_MAX_ATTEMPTS` untuk konfigurasi throttler.
+- [x] Pastikan `@UseGuards(ThrottlerGuard)` dipasang pada:
+    - [x] `LoginController.login`
+    - [x] `LoginController.loginAdmin`
+    - [x] `OauthController.loginGoogle`
+- [x] Tambahkan variabel `RATE_LIMIT_WINDOW_MS` dan `RATE_LIMIT_MAX_ATTEMPTS` di dalam file `.env`.
+- [x] Hapus file `src/guards/rate-limit.guard.ts` yang lama.
+- [x] Verifikasi build sistem dengan `npm run build`.

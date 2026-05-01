@@ -1,0 +1,7 @@
+- [ ] Create `GetTemplateDetailUseCase` in `src/modules/master-data/usecases/`
+    - [ ] `execute(id: string)`:
+        - [ ] Find `AssessmentTemplate` by ID.
+        - [ ] Relations: `sections`, `sections.criteria`, `sections.criteria.questions`.
+- [ ] Update `MasterDataController`: `GET /templates/:id`
+- [ ] Update `MasterDataModule`: Register `GetTemplateDetailUseCase` in providers.
+- [ ] Verifikasi build dan data di Swagger.

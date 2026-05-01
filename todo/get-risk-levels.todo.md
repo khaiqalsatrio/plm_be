@@ -1,0 +1,5 @@
+- [x] Create `GetRiskLevelsUseCase` in `src/modules/master-data/usecases/`
+    - [x] `execute()`: Fetch all risk levels ordered by `score_min` ASC.
+- [x] Update `MasterDataController`: `GET /risk-levels`
+- [x] Update `MasterDataModule`: Register `MasterRiskLevel` and `GetRiskLevelsUseCase`.
+- [x] Verifikasi build sistem dengan `npm run build`.

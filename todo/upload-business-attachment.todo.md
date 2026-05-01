@@ -1,0 +1,8 @@
+- [ ] Create `UploadBusinessAttachmentUseCase` in `src/modules/business-reviews/usecases/`
+    - [ ] `execute(assessmentId: string, file: any, logged: User, is_private: boolean, ...)`:
+        - [ ] Upload to Minio (`upload` or `uploadLegal`).
+        - [ ] Save to `AssessmentAttachment` repository.
+        - [ ] uploaded_by: `logged.id`.
+- [ ] Create `BusinessReviewController`: `POST /:id/attachments`
+    - [ ] Multipart handler (Fastify-style).
+- [ ] Register `UploadBusinessAttachmentUseCase` in `BusinessReviewModule`.

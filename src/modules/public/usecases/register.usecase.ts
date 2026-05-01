@@ -17,7 +17,8 @@ export class RegisterUseCase {
 
     async doRegister(registerDto: any): Promise<User> {
 
-        const email_hash = hashText(registerDto.email);
+        const normalizedEmail = registerDto.email?.trim().toLowerCase();
+        const email_hash = hashText(normalizedEmail);
         const check = await this.userRepository.findOne({
             where: { email_hash },
         });
@@ -27,7 +28,7 @@ export class RegisterUseCase {
         }
 
         const name = registerDto.name;
-        const email = encryptText(registerDto.email, Constant.JWT_SECRET).encrypted;
+        const email = encryptText(normalizedEmail, Constant.JWT_SECRET).encrypted;
         const phone = encryptText(registerDto.phone, Constant.JWT_SECRET).encrypted;
         const address = encryptText(registerDto.address, Constant.JWT_SECRET).encrypted;
         const user = new User();

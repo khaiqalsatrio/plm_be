@@ -1,0 +1,7 @@
+- [ ] Create `GetBusinessOwnerDashboardStatsUseCase` in `src/modules/business-owners/usecases/`
+    - [ ] `execute(logged: User)`:
+        - [ ] Calculate total products in BU.
+        - [ ] Calculate status counts for BU.
+        - [ ] Calculate risk distribution for BU.
+- [ ] Update `BusinessOwnerController`: `GET /dashboard-stats`
+    - [ ] Add `@Roles(BUSINESS_OWNER)`.

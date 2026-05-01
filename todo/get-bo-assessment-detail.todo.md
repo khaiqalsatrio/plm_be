@@ -1,0 +1,7 @@
+- [ ] Create `GetBusinessOwnerAssessmentDetailUseCase` in `src/modules/business-owners/usecases/`
+    - [ ] `execute(id: string, logged: User)`:
+        - [ ] Find assessment with relations: `product`, `reviews`, `approvals`, `attachments`.
+        - [ ] Validate `assessment.product.business_unit_id == logged.business_unit_id`.
+        - [ ] Ensure **NO** `responses` relation is loaded.
+- [ ] Update `BusinessOwnerController`: `GET /assessment/:id`
+    - [ ] Add `@Roles(BUSINESS_OWNER)`.

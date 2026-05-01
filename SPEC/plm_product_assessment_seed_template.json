@@ -1,0 +1,572 @@
+{
+  "templates": [
+    {
+      "template_code": "TPL-PA-DIGITAL-001",
+      "template_name": "Default Product Assessment Template",
+      "product_type": "digital_product",
+      "version": 1,
+      "description": "Template default untuk assessment produk digital mencakup teknis, business, dan legal",
+      "is_active": true,
+      "sections": [
+        {
+          "section_code": "TECH",
+          "section_name": "Technical Assessment",
+          "section_type": "technical",
+          "weight": 35,
+          "sort_order": 1,
+          "is_required": true,
+          "criteria": [
+            {
+              "criteria_code": "TECH-ARCH",
+              "criteria_name": "Architecture Fit",
+              "description": "Menilai kesesuaian solusi dengan arsitektur enterprise dan standar teknologi",
+              "weight": 12,
+              "score_type": "manual_score",
+              "sort_order": 1,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-ARCH-001",
+                  "question_text": "Apakah solusi sesuai dengan enterprise architecture yang berlaku?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "help_text": "Nilai 1-5 berdasarkan tingkat kesesuaian",
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-ARCH-002",
+                  "question_text": "Apakah stack teknologi yang digunakan sesuai standar perusahaan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "TECH-ARCH-003",
+                  "question_text": "Apakah membutuhkan platform atau komponen baru di luar baseline saat ini?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 3
+                }
+              ]
+            },
+            {
+              "criteria_code": "TECH-INTG",
+              "criteria_name": "Integration Complexity",
+              "description": "Menilai kompleksitas integrasi dengan sistem lain",
+              "weight": 10,
+              "score_type": "manual_score",
+              "sort_order": 2,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-INTG-001",
+                  "question_text": "Berapa tingkat kompleksitas integrasi antar sistem?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-INTG-002",
+                  "question_text": "Apakah produk bergantung pada legacy system yang sulit diintegrasikan?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "TECH-SEC",
+              "criteria_name": "Security",
+              "description": "Menilai kesiapan security, access control, dan encryption",
+              "weight": 15,
+              "score_type": "manual_score",
+              "sort_order": 3,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-SEC-001",
+                  "question_text": "Apakah authentication sudah menggunakan mekanisme yang sesuai standar?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-SEC-002",
+                  "question_text": "Apakah authorization dan role access sudah terdefinisi dengan baik?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "TECH-SEC-003",
+                  "question_text": "Apakah data sensitif dienkripsi saat transit dan storage?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 3
+                },
+                {
+                  "question_code": "TECH-SEC-004",
+                  "question_text": "Apakah terdapat potensi security risk yang signifikan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 3,
+                  "is_required": true,
+                  "sort_order": 4
+                }
+              ]
+            },
+            {
+              "criteria_code": "TECH-SCALE",
+              "criteria_name": "Scalability and Performance",
+              "description": "Menilai kesiapan produk terhadap load, traffic, dan performa",
+              "weight": 12,
+              "score_type": "manual_score",
+              "sort_order": 4,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-SCALE-001",
+                  "question_text": "Apakah arsitektur mampu menangani estimasi jumlah user dan transaksi?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 6,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-SCALE-002",
+                  "question_text": "Apakah kebutuhan performance target sudah terdefinisi dengan jelas?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 6,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "TECH-OPS",
+              "criteria_name": "Operational Readiness",
+              "description": "Menilai kesiapan monitoring, logging, backup, dan support model",
+              "weight": 10,
+              "score_type": "manual_score",
+              "sort_order": 5,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-OPS-001",
+                  "question_text": "Apakah monitoring dan logging sudah direncanakan dengan baik?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-OPS-002",
+                  "question_text": "Apakah backup, recovery, dan support model sudah siap?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "TECH-MAIN",
+              "criteria_name": "Maintainability and Technical Risk",
+              "description": "Menilai maintainability, kesiapan tim, dan risiko teknis",
+              "weight": 11,
+              "score_type": "manual_score",
+              "sort_order": 6,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "TECH-MAIN-001",
+                  "question_text": "Apakah solusi mudah dipelihara dan dikembangkan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "TECH-MAIN-002",
+                  "question_text": "Apakah tim memiliki skill yang cukup untuk build dan support produk ini?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "TECH-MAIN-003",
+                  "question_text": "Apakah terdapat technical risk besar seperti tech debt, lock-in, atau kompleksitas implementasi?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 3,
+                  "is_required": true,
+                  "sort_order": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "section_code": "BUS",
+          "section_name": "Business Assessment",
+          "section_type": "business",
+          "weight": 40,
+          "sort_order": 2,
+          "is_required": true,
+          "criteria": [
+            {
+              "criteria_code": "BUS-STRAT",
+              "criteria_name": "Strategic Alignment",
+              "description": "Menilai keselarasan produk terhadap tujuan bisnis dan strategi organisasi",
+              "weight": 10,
+              "score_type": "manual_score",
+              "sort_order": 1,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "BUS-STRAT-001",
+                  "question_text": "Apakah produk selaras dengan strategi dan prioritas bisnis organisasi?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "BUS-STRAT-002",
+                  "question_text": "Apakah sponsor bisnis dan objective produk sudah jelas?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "BUS-PROBLEM",
+              "criteria_name": "Problem-Solution Fit",
+              "description": "Menilai apakah solusi benar-benar menjawab problem yang nyata",
+              "weight": 10,
+              "score_type": "manual_score",
+              "sort_order": 2,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "BUS-PROBLEM-001",
+                  "question_text": "Apakah problem yang diselesaikan produk ini nyata dan terukur?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "BUS-PROBLEM-002",
+                  "question_text": "Apakah solusi yang ditawarkan tepat untuk menyelesaikan problem tersebut?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "BUS-MARKET",
+              "criteria_name": "Market Potential and Value Proposition",
+              "description": "Menilai potensi pasar dan value proposition produk",
+              "weight": 15,
+              "score_type": "manual_score",
+              "sort_order": 3,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "BUS-MARKET-001",
+                  "question_text": "Apakah target market atau user segment sudah jelas?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "BUS-MARKET-002",
+                  "question_text": "Apakah produk memiliki value proposition yang kuat dan berbeda dari alternatif yang ada?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "BUS-MARKET-003",
+                  "question_text": "Apakah peluang adopsi pasar atau user cukup tinggi?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 3
+                }
+              ]
+            },
+            {
+              "criteria_code": "BUS-FIN",
+              "criteria_name": "Financial Feasibility",
+              "description": "Menilai biaya, benefit, ROI, dan kelayakan finansial",
+              "weight": 15,
+              "score_type": "manual_score",
+              "sort_order": 4,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "BUS-FIN-001",
+                  "question_text": "Apakah estimasi biaya pengembangan dan operasional sudah realistis?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "BUS-FIN-002",
+                  "question_text": "Apakah manfaat bisnis atau cost saving produk ini cukup signifikan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "BUS-FIN-003",
+                  "question_text": "Apakah ROI atau justifikasi finansial produk ini layak?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 3
+                }
+              ]
+            },
+            {
+              "criteria_code": "BUS-RISK",
+              "criteria_name": "Adoption and Business Risk",
+              "description": "Menilai risiko bisnis dan kesiapan adopsi",
+              "weight": 10,
+              "score_type": "manual_score",
+              "sort_order": 5,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "BUS-RISK-001",
+                  "question_text": "Apakah user atau market siap mengadopsi produk ini?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "BUS-RISK-002",
+                  "question_text": "Apakah terdapat business risk besar seperti low adoption, demand uncertainty, atau stakeholder dependency?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 5,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "section_code": "LEGAL",
+          "section_name": "Legal Assessment",
+          "section_type": "legal",
+          "weight": 25,
+          "sort_order": 3,
+          "is_required": true,
+          "criteria": [
+            {
+              "criteria_code": "LEGAL-COMP",
+              "criteria_name": "Regulatory Compliance",
+              "description": "Menilai kepatuhan terhadap regulasi dan kebijakan yang relevan",
+              "weight": 8,
+              "score_type": "manual_score",
+              "sort_order": 1,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "LEGAL-COMP-001",
+                  "question_text": "Apakah produk tunduk pada regulasi tertentu yang wajib dipenuhi?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "LEGAL-COMP-002",
+                  "question_text": "Apakah tingkat kepatuhan terhadap regulasi yang relevan sudah memadai?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 4,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "LEGAL-PRIV",
+              "criteria_name": "Data Privacy",
+              "description": "Menilai risiko dan kepatuhan terkait data pribadi dan data sensitif",
+              "weight": 7,
+              "score_type": "manual_score",
+              "sort_order": 2,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "LEGAL-PRIV-001",
+                  "question_text": "Apakah produk memproses data pribadi atau data sensitif?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "LEGAL-PRIV-002",
+                  "question_text": "Apakah consent, retention policy, dan privacy control sudah dipertimbangkan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 3,
+                  "is_required": true,
+                  "sort_order": 2
+                },
+                {
+                  "question_code": "LEGAL-PRIV-003",
+                  "question_text": "Apakah terdapat risiko data privacy yang signifikan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 3
+                }
+              ]
+            },
+            {
+              "criteria_code": "LEGAL-CONTRACT",
+              "criteria_name": "Contractual Requirement",
+              "description": "Menilai kebutuhan kontrak, SLA, NDA, atau kerja sama pihak ketiga",
+              "weight": 4,
+              "score_type": "manual_score",
+              "sort_order": 3,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "LEGAL-CONTRACT-001",
+                  "question_text": "Apakah produk membutuhkan kontrak atau perjanjian khusus dengan pihak ketiga?",
+                  "question_type": "question",
+                  "answer_type": "boolean",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "LEGAL-CONTRACT-002",
+                  "question_text": "Apakah aspek kontraktual dan kewajiban hukum sudah cukup jelas?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "LEGAL-LICENSE",
+              "criteria_name": "Licensing and Intellectual Property",
+              "description": "Menilai risiko lisensi software dan kepemilikan intellectual property",
+              "weight": 3,
+              "score_type": "manual_score",
+              "sort_order": 4,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "LEGAL-LICENSE-001",
+                  "question_text": "Apakah terdapat penggunaan software pihak ketiga atau open source yang memiliki risiko lisensi?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "LEGAL-LICENSE-002",
+                  "question_text": "Apakah kepemilikan source code, content, model, atau dataset sudah jelas?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 1,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            },
+            {
+              "criteria_code": "LEGAL-RISK",
+              "criteria_name": "Legal Exposure and Policy Compliance",
+              "description": "Menilai liability exposure, dispute risk, dan kepatuhan kebijakan internal",
+              "weight": 3,
+              "score_type": "manual_score",
+              "sort_order": 5,
+              "is_required": true,
+              "questions": [
+                {
+                  "question_code": "LEGAL-RISK-001",
+                  "question_text": "Apakah terdapat potensi legal exposure atau liability yang signifikan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 2,
+                  "is_required": true,
+                  "sort_order": 1
+                },
+                {
+                  "question_code": "LEGAL-RISK-002",
+                  "question_text": "Apakah produk sudah sesuai dengan kebijakan internal perusahaan?",
+                  "question_type": "question",
+                  "answer_type": "score",
+                  "weight": 1,
+                  "is_required": true,
+                  "sort_order": 2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
