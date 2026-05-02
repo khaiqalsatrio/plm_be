@@ -145,4 +145,6 @@ export enum AuditActionType {
   APPROVE = 'approve',
   REJECT = 'reject',
   ARCHIVE = 'archive',
+  DELETE = 'delete',
+  LOGIN = 'login',
 }

@@ -6,7 +6,7 @@ import { ProductType } from '../common/constant/enum';
 
 @Entity('assessment_templates')
 export class AssessmentTemplate extends BaseEntity {
-  @Column({ name: 'template_code', type: 'varchar', length: 100, unique: true })
+  @Column({ name: 'template_code', type: 'varchar', length: 100 })
   public template_code: string;
 
   @Column({ name: 'template_name', type: 'varchar', length: 255 })

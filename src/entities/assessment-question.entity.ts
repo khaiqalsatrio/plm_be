@@ -9,11 +9,11 @@ export class AssessmentQuestion extends BaseEntity {
   @Column({ name: 'criteria_id', type: 'uuid' })
   public criteria_id: string;
 
-  @ManyToOne(() => AssessmentCriteria, (criteria) => criteria.questions)
+  @ManyToOne(() => AssessmentCriteria, (criteria) => criteria.questions, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'criteria_id' })
   public criteria: AssessmentCriteria;
 
-  @Column({ name: 'question_code', type: 'varchar', length: 100, unique: true })
+  @Column({ name: 'question_code', type: 'varchar', length: 100 })
   public question_code: string;
 
   @Column({ name: 'question_text', type: 'text' })

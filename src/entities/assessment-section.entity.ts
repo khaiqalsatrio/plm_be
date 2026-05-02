@@ -10,7 +10,7 @@ export class AssessmentSection extends BaseEntity {
   @Column({ name: 'template_id', type: 'uuid' })
   public template_id: string;
 
-  @ManyToOne(() => AssessmentTemplate, (template) => template.sections)
+  @ManyToOne(() => AssessmentTemplate, (template) => template.sections, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'template_id' })
   public template: AssessmentTemplate;
 
