@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsEnum, IsInt, IsBoolean, IsArray, ValidateNested, IsNumber } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsString, IsOptional, IsEnum, IsInt, IsBoolean, IsArray, ValidateNested, IsNumber } from 'class-validator';
+
 import { ProductType, SectionType, ScoreType, QuestionType, AnswerType } from '../../../common/constant/enum';
 
 export class QuestionDto {

@@ -1,9 +1,11 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { AppRequest, getIpAddress } from 'src/libraries/common/http.interface';
+
 import { AuditLogService } from '../../modules/audit-logs/audit-log.service';
 import { AuditActionType } from '../constant/enum';
-import { AppRequest, getIpAddress } from 'src/libraries/common/http.interface';
 
 @Injectable()
 export class AuditLogInterceptor implements NestInterceptor {

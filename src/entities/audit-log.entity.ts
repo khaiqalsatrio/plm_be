@@ -1,4 +1,5 @@
 import { Column, Entity, Index } from 'typeorm';
+
 import { BaseEntity } from './base.entity';
 import { AuditActionType } from '../common/constant/enum';
 

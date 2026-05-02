@@ -21,10 +21,10 @@ import { respond } from 'src/libraries/respond';
 
 import { CreateTemplateDto, UpdateTemplateDto } from './dto/assessment-template.dto';
 import { CreateTemplateUseCase } from './usecases/create-template.usecase';
-import { GetTemplateListUseCase } from './usecases/get-template-list.usecase';
 import { GetTemplateDetailUseCase } from './usecases/get-template-detail.usecase';
-import { UpdateTemplateUseCase } from './usecases/update-template.usecase';
+import { GetTemplateListUseCase } from './usecases/get-template-list.usecase';
 import { PublishTemplateUseCase } from './usecases/publish-template.usecase';
+import { UpdateTemplateUseCase } from './usecases/update-template.usecase';
 
 @ApiTags('Assessment Templates (Admin Features)')
 @ApiBearerAuth(JWT_ACCESS_TOKEN)
